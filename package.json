@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
+    "@vueuse/core": "^9.9.0",
     "axios": "^1.2.1",
     "element-plus": "^2.2.27",
+    "nprogress": "^0.2.0",
     "pinia": "^2.0.28",
     "swiper": "^8.4.5",
     "vue": "^3.2.41",
@@ -20,6 +22,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.11.17",
+    "@types/nprogress": "^0.2.0",
     "@vitejs/plugin-vue": "^3.2.0",
     "@vue/cli-plugin-router": "~5.0.0",
     "sass": "^1.57.1",

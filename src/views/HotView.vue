@@ -2,7 +2,7 @@
   <div>
     <div class="box">
       <div class="nav">
-        <SwiperView></SwiperView>
+        <SwiperView :swiperList="swiperList"></SwiperView>
       </div>
       <div class="top">
         <RankView></RankView>
@@ -21,6 +21,14 @@
 import SwiperView from "../components/SwiperView.vue";
 import RankView from "../components/RankView.vue";
 import VideoList from "../components/VideoList.vue";
+import { ref } from "vue";
+import { SwiperNewApi } from "../api";
+let swiperList = ref<swiperRes[]>([]);
+SwiperNewApi().then((res) => {
+  if (res.code == 200) {
+    swiperList.value = res.data;
+  }
+});
 </script>
 
 <style lang="scss" scoped>

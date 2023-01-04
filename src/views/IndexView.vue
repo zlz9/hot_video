@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="swiper">
-      <SwiperView></SwiperView>
+      <SwiperView :swiperList="swiperList"></SwiperView>
     </div>
     <VideoContent>
       <template #title>
@@ -89,11 +89,24 @@
 <script setup lang="ts">
 import SwiperView from "../components/SwiperView.vue";
 import VideoContent from "../components/VideoContent.vue";
+import { reactive, ref, onMounted } from "vue";
+import { SwiperHotApi } from "../api";
+let swiperList = ref<swiperRes[]>([]);
+const getSwiper = SwiperHotApi().then((res) => {
+  swiperList.value = res.data;
+});
+/**
+ * 发请求获取轮播图
+ */
+
+onMounted(() => {
+  getSwiper;
+});
 </script>
 
 <style lang="scss" scoped>
 .swiper {
-  width: 1500px;
-  height: 500px;
+  width: 1600px;
+  height: 600px;
 }
 </style>

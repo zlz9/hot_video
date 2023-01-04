@@ -13,6 +13,21 @@
         <!-- 路由出口 -->
         <router-view></router-view>
       </el-main>
+      <el-backtop :bottom="100">
+        <div
+          style="
+            height: 100%;
+            width: 100%;
+            background-color: var(--el-bg-color-overlay);
+            box-shadow: var(--el-box-shadow-lighter);
+            text-align: center;
+            line-height: 40px;
+            color: #1989fa;
+          "
+        >
+          TOP
+        </div>
+      </el-backtop>
       <el-footer>Footer</el-footer>
     </el-container>
   </div>
@@ -22,10 +37,13 @@
 import NavView from "./NavView.vue";
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 * {
   padding: 0;
   margin: 0;
+}
+.el-backtop {
+  background-color: #fff;
 }
 .common-layout {
   width: 100%;

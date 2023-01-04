@@ -12,13 +12,11 @@
       @swiper="onSwiper"
       @slideChange="onSlideChange"
     >
-      <swiper-slide>Slide 1</swiper-slide>
-      <swiper-slide>Slide 2</swiper-slide>
-      <swiper-slide>Slide 3</swiper-slide>
-      <swiper-slide>Slide 4</swiper-slide>
-      <swiper-slide>Slide 5</swiper-slide>
-      <swiper-slide>Slide 6</swiper-slide>
-      <swiper-slide>Slide 7</swiper-slide>
+      <swiper-slide v-for="(item, index) in props.swiperList">
+        <img v-lazy="item.cover" alt="" style="width: 100%; height: 100%" />
+        <div class="play_ico"></div>
+        <div class="play_back"></div>
+      </swiper-slide>
     </swiper>
   </div>
 </template>
@@ -42,16 +40,54 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
-const onSwiper = (swiper) => {};
+const props = defineProps({
+  swiperList: {
+    type: Array<swiperRes>,
+    required: true,
+  },
+});
+const onSwiper = () => {};
 const onSlideChange = () => {};
 const modules = [Autoplay, Pagination, Navigation, EffectFade];
 </script>
 
 <style lang="scss" scoped>
 .home {
+  position: relative;
   width: 100%;
   margin: 0 auto;
   height: 100%;
+
+  .play_ico {
+    display: none;
+  }
+  .play_back {
+    display: none;
+  }
+  &:hover .play_ico {
+    position: absolute;
+    display: block;
+    background-image: url(../assets/img/play.png);
+    height: 200px;
+    width: 200px;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  &:hover .play_back {
+    display: block;
+    background: black;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0.5;
+  }
+
   .swiper {
     height: 100%;
   }

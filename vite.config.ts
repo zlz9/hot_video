@@ -6,6 +6,15 @@ import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import path from "path";
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://nvzu.xxx.cn/", // 实际请求地址
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
+  },
   plugins: [
     vue(),
     // ...
