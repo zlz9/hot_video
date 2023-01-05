@@ -14,7 +14,7 @@
     >
       <swiper-slide v-for="(item, index) in props.swiperList">
         <img v-lazy="item.cover" alt="" style="width: 100%; height: 100%" />
-        <div class="play_ico"></div>
+        <div class="play_ico" @click="goPlayer(item.id)"></div>
         <div class="play_back"></div>
       </swiper-slide>
     </swiper>
@@ -34,7 +34,7 @@ import {
 
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
-
+import { useRouter } from "vue-router";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -46,9 +46,13 @@ const props = defineProps({
     required: true,
   },
 });
+const router = useRouter();
 const onSwiper = () => {};
 const onSlideChange = () => {};
 const modules = [Autoplay, Pagination, Navigation, EffectFade];
+const goPlayer = (id) => {
+  router.push("/player");
+};
 </script>
 
 <style lang="scss" scoped>
@@ -71,7 +75,6 @@ const modules = [Autoplay, Pagination, Navigation, EffectFade];
     height: 200px;
     width: 200px;
     background-repeat: no-repeat;
-    position: absolute;
     z-index: 1;
     top: 0;
     bottom: 0;

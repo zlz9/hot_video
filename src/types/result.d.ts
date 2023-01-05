@@ -9,3 +9,13 @@ interface swiperRes {
   url: string;
   name: string;
 }
+
+interface tagRes {
+  id: number;
+  tagName: string;
+  createTime?: any;
+  updateTime?: any;
+  authorId: number;
+  isDel: boolean;
+  icon: string;
+}

@@ -31,6 +31,7 @@ declare module '@vue/runtime-core' {
     NavView: typeof import('./src/components/NavView.vue')['default']
     Pagination: typeof import('./src/components/Pagination.vue')['default']
     RankView: typeof import('./src/components/RankView.vue')['default']
+    Recommend: typeof import('./src/components/Recommend.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchView: typeof import('./src/components/SearchView.vue')['default']
@@ -39,6 +40,7 @@ declare module '@vue/runtime-core' {
     UserView: typeof import('./src/components/UserView.vue')['default']
     VideoContent: typeof import('./src/components/VideoContent.vue')['default']
     VideoList: typeof import('./src/components/VideoList.vue')['default']
+    VideoPlayer: typeof import('./src/components/VideoPlayer.vue')['default']
     VideoView: typeof import('./src/components/VideoView.vue')['default']
   }
 }

@@ -41,7 +41,7 @@ SwiperNewApi().then((res) => {
   justify-content: space-around;
   padding: 5px;
   .nav {
-    width: 600px;
+    width: 800px;
     height: 100%;
     background-color: aqua;
   }

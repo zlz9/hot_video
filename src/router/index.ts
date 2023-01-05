@@ -40,6 +40,14 @@ const routes: Array<RouteRecordRaw> = [
         },
         component: () => import("@/views/CategoryView.vue"),
       },
+      {
+        path: "/player",
+        name: "player",
+        meta: {
+          title: "播放",
+        },
+        component: () => import("@/views/PlayerView.vue"),
+      },
     ],
   },
   {

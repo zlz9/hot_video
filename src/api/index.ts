@@ -26,3 +26,16 @@ export const LogoutApi = () => {
     url: "/api/logout",
   });
 };
+/**
+ * 标签
+ */
+export const TagAllApi = (): Promise<RootObject<tagRes>> => {
+  return requests({
+    url: "/api/tag/all",
+  });
+};
+export const getVideoByTagApi = (id: number) => {
+  requests({
+    url: `/api/tag/${id}`,
+  });
+};
