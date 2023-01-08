@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="video_player">
     <vue3VideoPlay v-bind="options" />
   </div>
 </template>
@@ -11,7 +11,8 @@ const options = reactive({
   height: "900px", //播放器高度
   color: "#409eff", //主题色
   title: "", //视频名称
-  src: "https://qiniu.zhoulizheng.cn/%E6%B5%8B%E8%AF%95%E8%A7%86%E9%A2%91.mp4", //视频源
+  src: "", //视频源
+  // https://qiniu.zhoulizheng.cn/%E6%B5%8B%E8%AF%95%E8%A7%86%E9%A2%91.mp4
   muted: false, //静音
   webFullScreen: false,
   speedRate: ["0.75", "1.0", "1.25", "1.5", "2.0"], //播放倍速
@@ -34,4 +35,10 @@ const options = reactive({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.video_player {
+  .d-slider .d-slider__runway .d-slider__bar:before {
+    background-image: url("../assets/img/可爱01.gif");
+  }
+}
+</style>

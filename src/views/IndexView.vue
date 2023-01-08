@@ -3,85 +3,20 @@
     <div class="swiper">
       <SwiperView :swiperList="swiperList"></SwiperView>
     </div>
-    <VideoContent>
-      <template #title>
-        推荐<svg
-          t="1672050637686"
-          class="icon"
-          viewBox="0 0 1024 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          p-id="3036"
-          width="30"
-          height="30"
-        >
-          <path
-            d="M453.5 168.6c0 132.7-84 216.5-120.1 246.4l-9.6 7.9-8.4-9.2c-5-5.5-25.7-11.1-40.9-11.1H111.3c-7.6 0-14.2 6.6-14.2 14.2v489.8c0 9.4 4.8 14.2 14.2 14.2h517.1c175.8 0 228.5-93.4 286.7-316.8 19-72.7 15.2-126.8-11.1-160.9-27.3-35.3-73.7-42.7-107.9-42.7-17.3 0-29.4 2-29.5 2l-2.2 0.2H609.7l6.4-17.5c0.3-0.7 26-71.5 26-113.1 0-152.3-78.6-168.8-112.3-168.8-6.6 0-10.7 0.7-10.8 0.7l-2.1 0.2c-6.5 0-63.4 2.6-63.4 64.5zM287.6 892.4H125.4V431h162.1v461.4z m241.9-762.7c40 0 87.6 22.4 87.6 129.3 0 76.6-42.1 139.9-68.4 171.9h214c4.5-1 17.4-3.5 33.4-3.5 35.3 0 63.2 11.9 80.5 34.5 23.9 31.1 27 81.1 9 148.7-47.4 178.5-104.7 281.8-257.5 281.8H315.9V464.3l5.7-3.9c1.6-1.1 156.7-107.9 156.7-291.8 0-25.8 17.3-38.9 51.2-38.9z"
-            fill="#dbdbdb"
-            p-id="3037"
-          ></path>
-        </svg>
-      </template>
+    <VideoContent :videoList="recommendVideo">
+      <template #title> 推荐 </template>
     </VideoContent>
-    <VideoContent>
-      <template #title>
-        最新<svg
-          t="1672050637686"
-          class="icon"
-          viewBox="0 0 1024 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          p-id="3036"
-          width="30"
-          height="30"
-        >
-          <path
-            d="M453.5 168.6c0 132.7-84 216.5-120.1 246.4l-9.6 7.9-8.4-9.2c-5-5.5-25.7-11.1-40.9-11.1H111.3c-7.6 0-14.2 6.6-14.2 14.2v489.8c0 9.4 4.8 14.2 14.2 14.2h517.1c175.8 0 228.5-93.4 286.7-316.8 19-72.7 15.2-126.8-11.1-160.9-27.3-35.3-73.7-42.7-107.9-42.7-17.3 0-29.4 2-29.5 2l-2.2 0.2H609.7l6.4-17.5c0.3-0.7 26-71.5 26-113.1 0-152.3-78.6-168.8-112.3-168.8-6.6 0-10.7 0.7-10.8 0.7l-2.1 0.2c-6.5 0-63.4 2.6-63.4 64.5zM287.6 892.4H125.4V431h162.1v461.4z m241.9-762.7c40 0 87.6 22.4 87.6 129.3 0 76.6-42.1 139.9-68.4 171.9h214c4.5-1 17.4-3.5 33.4-3.5 35.3 0 63.2 11.9 80.5 34.5 23.9 31.1 27 81.1 9 148.7-47.4 178.5-104.7 281.8-257.5 281.8H315.9V464.3l5.7-3.9c1.6-1.1 156.7-107.9 156.7-291.8 0-25.8 17.3-38.9 51.2-38.9z"
-            fill="#dbdbdb"
-            p-id="3037"
-          ></path>
-        </svg>
-      </template>
+    <VideoContent :videoList="lastVideo">
+      <template #title> 最新 </template>
     </VideoContent>
-    <VideoContent>
-      <template #title>
-        热门<svg
-          t="1672050637686"
-          class="icon"
-          viewBox="0 0 1024 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          p-id="3036"
-          width="30"
-          height="30"
-        >
-          <path
-            d="M453.5 168.6c0 132.7-84 216.5-120.1 246.4l-9.6 7.9-8.4-9.2c-5-5.5-25.7-11.1-40.9-11.1H111.3c-7.6 0-14.2 6.6-14.2 14.2v489.8c0 9.4 4.8 14.2 14.2 14.2h517.1c175.8 0 228.5-93.4 286.7-316.8 19-72.7 15.2-126.8-11.1-160.9-27.3-35.3-73.7-42.7-107.9-42.7-17.3 0-29.4 2-29.5 2l-2.2 0.2H609.7l6.4-17.5c0.3-0.7 26-71.5 26-113.1 0-152.3-78.6-168.8-112.3-168.8-6.6 0-10.7 0.7-10.8 0.7l-2.1 0.2c-6.5 0-63.4 2.6-63.4 64.5zM287.6 892.4H125.4V431h162.1v461.4z m241.9-762.7c40 0 87.6 22.4 87.6 129.3 0 76.6-42.1 139.9-68.4 171.9h214c4.5-1 17.4-3.5 33.4-3.5 35.3 0 63.2 11.9 80.5 34.5 23.9 31.1 27 81.1 9 148.7-47.4 178.5-104.7 281.8-257.5 281.8H315.9V464.3l5.7-3.9c1.6-1.1 156.7-107.9 156.7-291.8 0-25.8 17.3-38.9 51.2-38.9z"
-            fill="#dbdbdb"
-            p-id="3037"
-          ></path>
-        </svg>
-      </template>
+    <VideoContent :videoList="hotVideo">
+      <template #title> 热门 </template>
     </VideoContent>
-    <VideoContent>
-      <template #title>
-        搞笑<svg
-          t="1672050637686"
-          class="icon"
-          viewBox="0 0 1024 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          p-id="3036"
-          width="30"
-          height="30"
-        >
-          <path
-            d="M453.5 168.6c0 132.7-84 216.5-120.1 246.4l-9.6 7.9-8.4-9.2c-5-5.5-25.7-11.1-40.9-11.1H111.3c-7.6 0-14.2 6.6-14.2 14.2v489.8c0 9.4 4.8 14.2 14.2 14.2h517.1c175.8 0 228.5-93.4 286.7-316.8 19-72.7 15.2-126.8-11.1-160.9-27.3-35.3-73.7-42.7-107.9-42.7-17.3 0-29.4 2-29.5 2l-2.2 0.2H609.7l6.4-17.5c0.3-0.7 26-71.5 26-113.1 0-152.3-78.6-168.8-112.3-168.8-6.6 0-10.7 0.7-10.8 0.7l-2.1 0.2c-6.5 0-63.4 2.6-63.4 64.5zM287.6 892.4H125.4V431h162.1v461.4z m241.9-762.7c40 0 87.6 22.4 87.6 129.3 0 76.6-42.1 139.9-68.4 171.9h214c4.5-1 17.4-3.5 33.4-3.5 35.3 0 63.2 11.9 80.5 34.5 23.9 31.1 27 81.1 9 148.7-47.4 178.5-104.7 281.8-257.5 281.8H315.9V464.3l5.7-3.9c1.6-1.1 156.7-107.9 156.7-291.8 0-25.8 17.3-38.9 51.2-38.9z"
-            fill="#dbdbdb"
-            p-id="3037"
-          ></path>
-        </svg>
-      </template>
+    <VideoContent :videoList="funnyVideo">
+      <template #title> 搞笑 </template>
+    </VideoContent>
+    <VideoContent :videoList="gameVideo">
+      <template #title> 游戏 </template>
     </VideoContent>
   </div>
 </template>
@@ -90,17 +25,64 @@
 import SwiperView from "../components/SwiperView.vue";
 import VideoContent from "../components/VideoContent.vue";
 import { reactive, ref, onMounted } from "vue";
-import { SwiperHotApi } from "../api";
+import {
+  SwiperHotApi,
+  FunnyVideoApi,
+  GameVideoApi,
+  HotVideoApi,
+  LastVideoApi,
+  RecommendApi,
+} from "../api";
+
 let swiperList = ref<swiperRes[]>([]);
-const getSwiper = SwiperHotApi().then((res) => {
-  swiperList.value = res.data;
+let hotVideo = ref<VideoRes[]>([]);
+let lastVideo = ref<VideoRes[]>([]);
+let recommendVideo = ref<VideoRes[]>([]);
+let funnyVideo = ref<VideoRes[]>([]);
+let gameVideo = ref<VideoRes[]>([]);
+
+const getFunny = FunnyVideoApi().then((res) => {
+  if (res.code == 200) {
+    funnyVideo.value = res.data;
+  }
+});
+
+const getGame = GameVideoApi().then((res) => {
+  if (res.code == 200) {
+    gameVideo.value = res.data;
+  }
+});
+
+const getHot = HotVideoApi().then((res) => {
+  if (res.code == 200) {
+    hotVideo.value = res.data;
+  }
+});
+
+const getLast = LastVideoApi().then((res) => {
+  if (res.code == 200) {
+    lastVideo.value = res.data;
+  }
+});
+
+const getRecommend = RecommendApi().then((res) => {
+  if (res.code == 200) {
+    recommendVideo.value = res.data;
+  }
 });
 /**
  * 发请求获取轮播图
  */
-
+const getSwiper = SwiperHotApi().then((res) => {
+  swiperList.value = res.data;
+});
 onMounted(() => {
   getSwiper;
+  getFunny;
+  getGame;
+  getHot;
+  getLast;
+  getRecommend;
 });
 </script>
 

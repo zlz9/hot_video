@@ -14,18 +14,8 @@
         <router-view></router-view>
       </el-main>
       <el-backtop :bottom="100">
-        <div
-          style="
-            height: 100%;
-            width: 100%;
-            background-color: var(--el-bg-color-overlay);
-            box-shadow: var(--el-box-shadow-lighter);
-            text-align: center;
-            line-height: 40px;
-            color: #1989fa;
-          "
-        >
-          TOP
+        <div class="go-top">
+          <img src="../assets/img/可爱01.gif" alt="" />
         </div>
       </el-backtop>
       <el-footer>Footer</el-footer>
@@ -42,8 +32,16 @@ import NavView from "./NavView.vue";
   padding: 0;
   margin: 0;
 }
+.go-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img {
+    width: 60px;
+    height: 60px;
+  }
+}
 .el-backtop {
-  background-color: #fff;
 }
 .common-layout {
   width: 100%;

@@ -16,8 +16,21 @@
         </div>
         <div class="nick_name">测试名称</div>
       </div>
-      <div class="summary"></div>
-      <div class="data"></div>
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          position: relative;
+          width: 1200px;
+          left: 200px;
+        "
+      >
+        <div class="summary">
+          一夜间惨变孤儿的张小凡被青云门收为弟子，经过五年刻苦修炼，他在师门七脉会武上大放异彩，后被派往空桑山打探魔教行迹，旅程中，他与师姐陆雪琪遭遇危难，并结识救护了魔教女子碧瑶，同时，新的危险也在前方等待着他。
+        </div>
+        <div class="date">1999-12-12</div>
+      </div>
     </div>
   </div>
 </template>
@@ -47,15 +60,28 @@ import Recommend from "../components/Recommend.vue";
   }
   .video_info {
     color: $font-color;
+    display: flex;
+    margin: 10px;
+
     .author {
       .avatar {
+        width: 80px;
+        height: 80px;
         img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
         }
+      }
+      .nick_name {
       }
     }
     .summary {
+      text-indent: 2em;
     }
-    .data {
+    .date {
+      position: relative;
+      top: 20px;
     }
   }
 }

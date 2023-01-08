@@ -3,6 +3,25 @@ interface RootObject<T> {
   data: T[];
 }
 
+interface VideoRes {
+  id: number;
+  cover: string;
+  url: string;
+  name: string;
+  createTime: number;
+  updateTime: number;
+  author: Author;
+  weight: number;
+  selfIntroduction: string;
+}
+
+interface Author {
+  id: number;
+  nickName: string;
+  avatar: string;
+  selfIntroduction: string;
+}
+
 interface swiperRes {
   id: number;
   cover: string;
@@ -18,4 +37,11 @@ interface tagRes {
   authorId: number;
   isDel: boolean;
   icon: string;
+}
+
+interface Author {
+  id: number;
+  nickName: string;
+  avatar: string;
+  selfIntroduction: string;
 }

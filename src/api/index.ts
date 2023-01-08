@@ -1,3 +1,4 @@
+import { pa } from "element-plus/es/locale";
 import requests from "./request";
 /**
  * swiper模块
@@ -37,5 +38,55 @@ export const TagAllApi = (): Promise<RootObject<tagRes>> => {
 export const getVideoByTagApi = (id: number) => {
   requests({
     url: `/api/tag/${id}`,
+  });
+};
+/**
+ * 视频
+ */
+export const FunnyVideoApi = (): Promise<RootObject<VideoRes>> => {
+  return requests({
+    url: "/api/video/funny",
+  });
+};
+
+export const GameVideoApi = (): Promise<RootObject<VideoRes>> => {
+  return requests({
+    url: "/api/video/game",
+  });
+};
+
+export const HotVideoApi = (): Promise<RootObject<VideoRes>> => {
+  return requests({
+    url: "/api/video/hot",
+  });
+};
+
+export const LastVideoApi = (): Promise<RootObject<VideoRes>> => {
+  return requests({
+    url: "/api/video/new",
+  });
+};
+
+export const RecommendApi = (): Promise<RootObject<VideoRes>> => {
+  return requests({
+    url: "/api/video/recommend",
+  });
+};
+export const HotVideoTopApi = (
+  page: PageParams
+): Promise<RootObject<VideoRes>> => {
+  return requests({
+    url: `/api/top/hot`,
+    method: "get",
+    params: page,
+  });
+};
+export const VideoByTagApi = (
+  page: PageParams
+): Promise<RootObject<VideoByTagRes>> => {
+  return requests({
+    url: "/api/video/category",
+    method: "get",
+    params: page,
   });
 };

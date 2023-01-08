@@ -3,3 +3,8 @@ interface LoginParams {
   password: string;
   userName: string;
 }
+interface PageParams {
+  tagId?: number;
+  page: number;
+  pageSize: number;
+}
