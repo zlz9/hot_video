@@ -3,6 +3,11 @@ interface RootObject<T> {
   data: T[];
 }
 
+interface RootString {
+  code: number;
+  msg: string;
+}
+
 interface VideoRes {
   id: number;
   cover: string;
@@ -44,4 +49,14 @@ interface Author {
   nickName: string;
   avatar: string;
   selfIntroduction: string;
+}
+
+interface RootStringData {
+  code: number;
+  msg: string;
+  data: token;
+}
+
+interface token {
+  token: string;
 }

@@ -1,4 +1,3 @@
-import { pa } from "element-plus/es/locale";
 import requests from "./request";
 /**
  * swiper模块
@@ -18,13 +17,33 @@ export const SwiperNewApi = (): Promise<RootObject<swiperRes>> => {
 /**
  * 登录
  */
-export const LoginApi = (data: LoginParams) => {
-  requests({ url: "/api/login", data });
+export const LoginApi = (data: LoginParams): Promise<RootStringData> => {
+  return requests({ url: "/api/login", params: data, method: "post" });
 };
 
 export const LogoutApi = () => {
   requests({
     url: "/api/logout",
+  });
+};
+// 获取邮箱验证码
+export const sendEmailApi = (
+  emailReceiver: string
+): Promise<RootObject<RootString>> => {
+  return requests({
+    url: "/api/sendEmail",
+    method: "get",
+    params: { emailReceiver: emailReceiver },
+  });
+};
+
+export const RegisterApi = (
+  params: RegisterParams
+): Promise<RootObject<string>> => {
+  return requests({
+    url: "/api/register",
+    method: "post",
+    data: params,
   });
 };
 /**

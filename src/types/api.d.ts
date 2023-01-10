@@ -8,3 +8,10 @@ interface PageParams {
   page: number;
   pageSize: number;
 }
+
+interface RegisterParams {
+  email: string;
+  password: string;
+  userName: string;
+  code: string;
+}

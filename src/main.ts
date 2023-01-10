@@ -6,6 +6,9 @@ import { createPinia } from "pinia";
 import ImaggerUI from "../src/utils/ImggerUI";
 import vue3videoPlay from "vue3-video-play"; // 引入组件
 import "vue3-video-play/dist/style.css"; // 引入css
+//引入Elmessage和Elloading的css样式文件
+import "element-plus/theme-chalk/el-loading.css";
+import "element-plus/theme-chalk/el-message.css";
 import dayjs from "dayjs";
 const pinia = createPinia();
 const app = createApp(App);

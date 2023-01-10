@@ -55,6 +55,7 @@
                 type="password"
                 autocomplete="off"
                 placeholder="密码"
+                show-password
               />
             </el-form-item>
             <!-- 验证码 -->
@@ -94,6 +95,8 @@
 import { reactive, ref } from "vue";
 import type { FormInstance } from "element-plus";
 import { useRouter } from "vue-router";
+import { LoginApi } from "../api/index";
+import { ElMessage } from "element-plus";
 const router = useRouter();
 let imgUrl = ref("http://localhost:8088/api/captcha?");
 const ruleFormRef = ref<FormInstance>();
@@ -122,10 +125,22 @@ const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate((valid) => {
     if (valid) {
-      console.log("submit!");
-      router.push("/index");
+      // 用户登录
+      LoginApi(ruleForm).then((res) => {
+        if (res.code == 200) {
+          router.push("/index");
+          ElMessage({
+            dangerouslyUseHTMLString: true,
+            message: "<h2>登录成功°꒰๑'ꀾ'๑꒱°</h2>",
+          });
+        } else {
+          ElMessage({
+            dangerouslyUseHTMLString: true,
+            message: `<h2>${res.msg}°꒰๑'ꀾ'๑꒱°</h2>`,
+          });
+        }
+      });
     } else {
-      console.log("error submit!");
       return false;
     }
   });
@@ -142,6 +157,12 @@ const resetForm = (formEl: FormInstance | undefined) => {
 </script>
 
 <style lang="scss">
+.el-message {
+  background-color: rgb(24, 16, 120);
+  text-align: center;
+  height: 60px;
+  width: 350px;
+}
 .el-form-item__error {
   color: rgb(2, 19, 34);
 }

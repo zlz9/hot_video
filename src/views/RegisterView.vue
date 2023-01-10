@@ -55,11 +55,30 @@
                 type="password"
                 autocomplete="off"
                 placeholder="密码"
+                show-password
+              />
+            </el-form-item>
+            <!-- 邮箱 -->
+            <el-form-item prop="email">
+              <el-input
+                v-model="ruleForm.email"
+                type="text"
+                autocomplete="off"
+                placeholder="QQ邮箱"
               />
             </el-form-item>
             <!-- 验证码 -->
             <el-form-item prop="code">
-              <el-input v-model="ruleForm.code" placeholder="验证码" />
+              <div style="display: flex">
+                <el-input v-model="ruleForm.code" placeholder="验证码" />
+                <el-button
+                  style="#5dc1a3;margin-left: 5px"
+                  :loading="checkCodeBtn.loading"
+                  :disabled="checkCodeBtn.disabled"
+                  @click="getCheckCode"
+                  >{{ checkCodeBtn.text }}</el-button
+                >
+              </div>
             </el-form-item>
             <el-form-item>
               <div class="btn">
@@ -83,15 +102,35 @@
 
 <script setup lang="ts">
 import { reactive, ref } from "vue";
+import { ElMessage } from "element-plus";
 import type { FormInstance } from "element-plus";
 import { useRouter } from "vue-router";
+import { sendEmailApi, RegisterApi } from "../api/index";
 const router = useRouter();
+// 按钮倒计时
+let checkCodeBtn = reactive<any>({
+  text: "获取验证码",
+  loading: false,
+  disabled: false,
+  duration: 60,
+  timer: null,
+});
 const ruleFormRef = ref<FormInstance>();
 const ruleForm = reactive({
   userName: "",
   password: "",
   code: "",
+  email: "",
 });
+const checkEmail = (rule: any, value: any, callback: any) => {
+  // 邮箱正则表达式
+  const regEmail = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+  if (regEmail.test(value)) {
+    // True 合法的邮箱
+    return callback();
+  }
+  callback(new Error("请输入合法的邮箱"));
+};
 
 const rules = reactive({
   userName: [
@@ -104,18 +143,22 @@ const rules = reactive({
   ],
   code: [
     { trigger: "blur", required: true },
-    { min: 4, max: 4, message: "验证码长度为四个字符", trigger: "blur" },
+    { min: 4, max: 6, message: "验证码长度为6个字符", trigger: "blur" },
   ],
+  email: [{ validator: checkEmail, trigger: "blur", required: true }],
 });
 
 const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate((valid) => {
     if (valid) {
-      console.log("submit!");
-      router.push("/index");
+      // 用户注册
+      RegisterApi(ruleForm).then((res) => {
+        if (res.code == 200) {
+          router.push("/login");
+        }
+      });
     } else {
-      console.log("error submit!");
       return false;
     }
   });
@@ -124,6 +167,41 @@ const submitForm = (formEl: FormInstance | undefined) => {
 const resetForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.resetFields();
+};
+const getCheckCode = () => {
+  // 如果email为空 提示输入验证码
+  if (ruleForm.email == "") {
+    ElMessage({
+      type: "error",
+      message: "请输入QQ邮箱",
+    });
+    return;
+  }
+  // 倒计时期间按钮不能单击
+  if (checkCodeBtn.duration !== 60) {
+    checkCodeBtn.disabled = true;
+  }
+  // 清除掉定时器
+  checkCodeBtn.timer && clearInterval(checkCodeBtn.timer);
+  // 开启定时器
+  checkCodeBtn.timer = setInterval(() => {
+    const tmp = checkCodeBtn.duration--;
+    checkCodeBtn.text = `${tmp}秒`;
+    if (tmp <= 0) {
+      // 清除掉定时器
+      clearInterval(checkCodeBtn.timer);
+      checkCodeBtn.duration = 60;
+      checkCodeBtn.text = "重新获取";
+      // 设置按钮可以单击
+      checkCodeBtn.disabled = false;
+    }
+  }, 1000);
+  sendEmailApi(ruleForm.email).then((res) => {
+    ElMessage({
+      type: "success",
+      message: "发送验证码成功,请检查您的邮箱",
+    });
+  });
 };
 </script>
 
