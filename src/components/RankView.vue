@@ -3,7 +3,12 @@
   <div class="title">
     <slot name="title">默认标题 </slot>
   </div>
-  <div class="item" v-for="(item, index) in props.videoData" :key="item.id">
+  <div
+    class="item"
+    v-for="(item, index) in props.videoData"
+    :key="item.id"
+    @click="goPlayer(item.id)"
+  >
     <div class="index">{{ index + 1 }}</div>
     <div class="cover">
       <img v-lazy="item.cover" alt="" />
@@ -17,6 +22,11 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from "vue-router";
+const router = useRouter();
+const goPlayer = (id: number) => {
+  router.push({ path: "/player", query: { id: id } });
+};
 const props = defineProps({
   videoData: {
     type: Array<VideoRes>,

@@ -1,12 +1,12 @@
 <template>
-  <!-- 上传组件 -->
-  <div class="update-box">上传组件</div>
+  <!-- 收藏组件 -->
+  <div class="collection-box">收藏组件</div>
 </template>
 
 <script setup lang="ts"></script>
 
 <style lang="scss" scoped>
-.update-box {
+.collection-box {
   color: $font-color;
 }
 </style>

@@ -1,12 +1,12 @@
 <template>
-  <!-- 上传组件 -->
-  <div class="update-box">上传组件</div>
+  <!-- 私信组件 -->
+  <div class="message-box">私信组件</div>
 </template>
 
 <script setup lang="ts"></script>
 
 <style lang="scss" scoped>
-.update-box {
+.message-box {
   color: $font-color;
 }
 </style>

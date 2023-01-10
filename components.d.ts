@@ -8,6 +8,8 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     CategoryComp: typeof import('./src/components/CategoryComp.vue')['default']
+    CommentList: typeof import('./src/components/CommentList.vue')['default']
+    CommentView: typeof import('./src/components/CommentView.vue')['default']
     ElAffix: typeof import('element-plus/es')['ElAffix']
     ElAutocomplete: typeof import('element-plus/es')['ElAutocomplete']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']

@@ -37,7 +37,11 @@
     </div>
     <div style="display: flex; flex-direction: row; justify-content: center">
       <el-row :gutter="30">
-        <el-col :span="6" v-for="(item, index) in props.videoList.slice(0, 4)">
+        <el-col
+          :span="6"
+          v-for="(item, index) in props.videoList.slice(0, 4)"
+          @click="goPlayer(item.id)"
+        >
           <div class="content">
             <img v-lazy="item.cover" alt="" />
             <div class="play_icon"></div>
@@ -66,8 +70,12 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, watch, ref, watchEffect } from "vue";
 import day from "dayjs";
+import { useRouter } from "vue-router";
+const router = useRouter();
+const goPlayer = (id: number) => {
+  router.push({ path: "/player", query: { id: id } });
+};
 const props = defineProps({
   videoList: {
     type: Array<VideoRes>,

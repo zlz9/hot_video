@@ -32,7 +32,8 @@
               </svg>
             </div>
             <div class="update">
-              上传<svg
+              <router-link to="/update">上传</router-link>
+              <svg
                 t="1672995747119"
                 class="icon"
                 viewBox="0 0 1024 1024"
@@ -55,7 +56,8 @@
               </svg>
             </div>
             <div class="like">
-              收藏<svg
+              <router-link to="/collection">收藏</router-link>
+              <svg
                 t="1672377133006"
                 class="icon"
                 viewBox="0 0 1024 1024"
@@ -73,7 +75,8 @@
               </svg>
             </div>
             <div class="history">
-              历史<svg
+              <router-link to="/history">历史</router-link
+              ><svg
                 t="1672377171560"
                 class="icon"
                 viewBox="0 0 1024 1024"
@@ -91,7 +94,7 @@
               </svg>
             </div>
             <div class="message">
-              私信
+              <router-link to="/message">私信</router-link>
               <svg
                 t="1672377219155"
                 class="icon"
@@ -110,7 +113,8 @@
               </svg>
             </div>
             <div class="modify">
-              修改<svg
+              <router-link to="/admin">管理</router-link>
+              <svg
                 t="1672377251682"
                 class="icon"
                 viewBox="0 0 1024 1024"
@@ -172,6 +176,10 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
+a {
+  text-decoration: none;
+  color: #fff;
+}
 .user_info {
   position: fixed;
   top: 75px;

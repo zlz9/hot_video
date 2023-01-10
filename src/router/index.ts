@@ -48,6 +48,46 @@ const routes: Array<RouteRecordRaw> = [
         },
         component: () => import("@/views/PlayerView.vue"),
       },
+      {
+        path: "/update",
+        name: "update",
+        meta: {
+          title: "上传",
+        },
+        component: () => import("../views/UpdateView.vue"),
+      },
+      {
+        path: "/collection",
+        name: "collection",
+        meta: {
+          title: "收藏",
+        },
+        component: () => import("../views/CollectionView.vue"),
+      },
+      {
+        path: "/history",
+        name: "history",
+        meta: {
+          title: "历史",
+        },
+        component: () => import("../views/HistoryView.vue"),
+      },
+      {
+        path: "/admin",
+        name: "admin",
+        meta: {
+          title: "管理",
+        },
+        component: () => import("../views/AdminView.vue"),
+      },
+      {
+        path: "/message",
+        name: "message",
+        meta: {
+          title: "私信",
+        },
+        component: () => import("../views/MessageView.vue"),
+      },
     ],
   },
   {

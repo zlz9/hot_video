@@ -1,41 +1,53 @@
 <template>
-  <div>
-    <div class="title">
-      <slot name="title"> </slot>
-      <slot name="icon"></slot>
-    </div>
-    <div class="video_list">
-      <el-row :gutter="20">
-        <el-col :span="6" v-for="(item, index) in props.videoData">
-          <div class="content">
-            <img v-lazy="item.cover" alt="" />
-            <div class="play_icon"></div>
-            <div class="play_back"></div>
-            <!-- 视频介绍 -->
-            <div class="video_info">
-              <div class="author">
-                <div class="author_avatar">
-                  <img v-lazy="item.author.avatar" alt="" />
+  <keep-alive>
+    <div>
+      <div class="title">
+        <slot name="title"> </slot>
+        <slot name="icon"></slot>
+      </div>
+      <div class="video_list">
+        <el-row :gutter="20">
+          <el-col
+            :span="6"
+            v-for="(item, index) in props.videoData"
+            @click="goPlayer(item.id)"
+          >
+            <div class="content">
+              <img v-lazy="item.cover" alt="" />
+              <div class="play_icon"></div>
+              <div class="play_back"></div>
+              <!-- 视频介绍 -->
+              <div class="video_info">
+                <div class="author">
+                  <div class="author_avatar">
+                    <img v-lazy="item.author.avatar" alt="" />
+                  </div>
+                  <div class="author_name">{{ item.author.nickName }}</div>
                 </div>
-                <div class="author_name">{{ item.author.nickName }}</div>
-              </div>
-              <div class="video_info_item">
-                <div class="video_name">{{ item.name }}</div>
-                <div class="introduction">{{ item.selfIntroduction }}</div>
-                <div class="create_time">
-                  上传时间-{{ day(item.createTime).format("YYYY-MM-DD") }}
+                <div class="video_info_item">
+                  <div class="video_name">{{ item.name }}</div>
+                  <div class="introduction">{{ item.selfIntroduction }}</div>
+                  <div class="create_time">
+                    上传时间-{{ day(item.createTime).format("YYYY-MM-DD") }}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </el-col>
-      </el-row>
+          </el-col>
+        </el-row>
+      </div>
     </div>
-  </div>
+  </keep-alive>
 </template>
 
 <script setup lang="ts">
 import { PropType } from "vue";
+import day from "dayjs";
+import { useRouter } from "vue-router";
+const router = useRouter();
+const goPlayer = (id: number) => {
+  router.push({ path: "/player", query: { id: id } });
+};
 const props = defineProps({
   videoData: {
     // type: Object as PropType<VideoByTagRes>,

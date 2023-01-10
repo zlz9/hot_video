@@ -9,7 +9,27 @@
       <div class="login">
         <div class="user">
           <div class="avator">
-            <el-avatar :size="60"> user </el-avatar>
+            <el-avatar :size="60"
+              ><svg
+                t="1673329931209"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="2878"
+                width="64"
+                height="64"
+              >
+                <path
+                  d="M575.215 547.318c53.367-24.316 90.562-78.011 90.562-140.522 0-85.257-69.149-154.383-154.406-154.383-85.299 0-154.427 69.126-154.427 154.383 0 62.49 37.172 116.185 90.562 140.522-87.156 27.24-150.586 108.698-150.586 204.715 0 12.071 9.779 21.827 21.827 21.827s21.827-9.756 21.827-21.827c0-94.161 76.613-170.774 170.776-170.774 94.184 0 170.797 76.613 170.797 170.774 0 12.071 9.756 21.827 21.827 21.827 12.07 0 21.827-9.756 21.827-21.827 0.021-95.994-63.43-177.475-150.586-204.715zM400.621 406.817c0-61.072 49.678-110.729 110.773-110.729 61.072 0 110.75 49.657 110.75 110.729 0 61.094-49.678 110.794-110.75 110.794-61.095 0-110.773-49.7-110.773-110.794z"
+                  p-id="2879"
+                ></path>
+                <path
+                  d="M511.371 960.81c-246.951 0-447.869-200.918-447.869-447.891 0-246.93 200.919-447.871 447.869-447.871 246.973 0 447.892 200.919 447.892 447.871 0 246.973-200.919 447.891-447.892 447.891z m0-854.269c-224.098 0-406.398 182.301-406.398 406.377s182.3 406.397 406.398 406.397c224.099 0 406.42-182.321 406.42-406.397S735.47 106.541 511.371 106.541z"
+                  p-id="2880"
+                ></path>
+              </svg>
+            </el-avatar>
           </div>
           <el-form
             ref="ruleFormRef"
@@ -19,25 +39,36 @@
             label-width="120px"
             class="demo-ruleForm"
           >
-            <el-form-item prop="pass">
+            <!-- 用户名 -->
+            <el-form-item prop="userName">
               <el-input
-                v-model="ruleForm.pass"
-                type="password"
+                v-model="ruleForm.userName"
+                type="text"
                 autocomplete="off"
+                placeholder="用户名"
               />
             </el-form-item>
-            <el-form-item prop="checkPass">
+            <!-- 密码 -->
+            <el-form-item prop="password">
               <el-input
-                v-model="ruleForm.checkPass"
+                v-model="ruleForm.password"
                 type="password"
                 autocomplete="off"
+                placeholder="密码"
               />
             </el-form-item>
-            <el-form-item prop="age">
-              <el-input v-model.number="ruleForm.age" />
+            <!-- 验证码 -->
+            <el-form-item prop="code">
+              <div style="display: flex">
+                <el-input v-model="ruleForm.code" placeholder="验证码" /><span
+                  style="width: 115px; text-align: center; display: flex"
+                >
+                  <img :src="imgUrl" alt="" srcset="" @click="changeImgCode" />
+                </span>
+              </div>
             </el-form-item>
-            <el-form-item
-              ><el-link type="warning">没有账号？点击注册</el-link>
+            <el-form-item>
+              <router-link to="/register">没有账号？点击注册</router-link>
             </el-form-item>
             <el-form-item>
               <div class="btn">
@@ -64,56 +95,27 @@ import { reactive, ref } from "vue";
 import type { FormInstance } from "element-plus";
 import { useRouter } from "vue-router";
 const router = useRouter();
+let imgUrl = ref("http://localhost:8088/api/captcha?");
 const ruleFormRef = ref<FormInstance>();
-
-const checkAge = (rule: any, value: any, callback: any) => {
-  if (!value) {
-    return callback(new Error("Please input the age"));
-  }
-  setTimeout(() => {
-    if (!Number.isInteger(value)) {
-      callback(new Error("Please input digits"));
-    } else {
-      if (value < 18) {
-        callback(new Error("Age must be greater than 18"));
-      } else {
-        callback();
-      }
-    }
-  }, 1000);
-};
-
-const validatePass = (rule: any, value: any, callback: any) => {
-  if (value === "") {
-    callback(new Error("Please input the password"));
-  } else {
-    if (ruleForm.checkPass !== "") {
-      if (!ruleFormRef.value) return;
-      ruleFormRef.value.validateField("checkPass", () => null);
-    }
-    callback();
-  }
-};
-const validatePass2 = (rule: any, value: any, callback: any) => {
-  if (value === "") {
-    callback(new Error("Please input the password again"));
-  } else if (value !== ruleForm.pass) {
-    callback(new Error("Two inputs don't match!"));
-  } else {
-    callback();
-  }
-};
-
 const ruleForm = reactive({
-  pass: "",
-  checkPass: "",
-  age: "",
+  userName: "",
+  password: "",
+  code: "",
 });
 
 const rules = reactive({
-  pass: [{ validator: validatePass, trigger: "blur" }],
-  checkPass: [{ validator: validatePass2, trigger: "blur" }],
-  age: [{ validator: checkAge, trigger: "blur" }],
+  userName: [
+    { trigger: "blur", required: true },
+    { min: 3, max: 6, message: "验证码长度为3-6个字符", trigger: "blur" },
+  ],
+  password: [
+    { trigger: "blur", required: true },
+    { min: 8, max: 16, message: "验证码长度为8-16个字符", trigger: "blur" },
+  ],
+  code: [
+    { trigger: "blur", required: true },
+    { min: 4, max: 4, message: "验证码长度为四个字符", trigger: "blur" },
+  ],
 });
 
 const submitForm = (formEl: FormInstance | undefined) => {
@@ -129,13 +131,20 @@ const submitForm = (formEl: FormInstance | undefined) => {
   });
 };
 
+const changeImgCode = () => {
+  imgUrl.value = imgUrl.value + new Date();
+};
+
 const resetForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.resetFields();
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.el-form-item__error {
+  color: rgb(2, 19, 34);
+}
 .cute {
   position: relative;
   top: 230px;

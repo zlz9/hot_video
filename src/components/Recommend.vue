@@ -21,7 +21,9 @@
 .recommend {
   width: 100%;
   height: 900px;
-  background-color: aquamarine;
+  background-color: rgb(33, 12, 110);
+  color: $font-color;
+  font-family: $font-family;
   .title {
     text-align: center;
     font-size: $font-title;
@@ -41,6 +43,9 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    &:hover {
+      background-color: aqua;
+    }
 
     .title {
     }

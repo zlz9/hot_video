@@ -1,12 +1,12 @@
 <template>
-  <!-- 上传组件 -->
-  <div class="update-box">上传组件</div>
+  <!-- 管理组件 -->
+  <div class="admin-box">管理组件</div>
 </template>
 
 <script setup lang="ts"></script>
 
 <style lang="scss" scoped>
-.update-box {
+.admin-box {
   color: $font-color;
 }
 </style>

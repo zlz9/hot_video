@@ -32,12 +32,14 @@
         <div class="date">1999-12-12</div>
       </div>
     </div>
+    <CommentView></CommentView>
   </div>
 </template>
 
 <script setup lang="ts">
 import VideoPlayer from "../components/VideoPlayer.vue";
 import Recommend from "../components/Recommend.vue";
+import CommentView from "../components/CommentView.vue";
 </script>
 
 <style lang="scss" scoped>
