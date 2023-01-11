@@ -38,6 +38,8 @@
 <script setup lang="ts">
 import { TagAllApi } from "../api";
 import { reactive, ref } from "vue";
+import { useTagStore } from "../store/tag";
+const tagStore = useTagStore();
 const isActive = ref<number>(0);
 const index = ref<number>(4);
 const showMoreTag = (i: number) => {
@@ -59,6 +61,7 @@ const ChooseTag = (id: number) => {
 TagAllApi().then((res) => {
   if (res.code == 200) {
     tagList.value = res.data;
+    tagStore.tag = res.data;
   }
 });
 

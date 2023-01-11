@@ -168,6 +168,8 @@ const cancel = () => {
   isShow.value = false;
 };
 const logout = () => {
+  // 清除token
+  localStorage.removeItem("token");
   router.push("/login");
 };
 defineExpose({

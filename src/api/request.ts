@@ -26,7 +26,8 @@ requests.interceptors.request.use(
 
     config.headers = config.headers || {};
     const userStore = useUserStore();
-    // config.headers.token = userStore.token;
+    config.headers.token = userStore.token;
+    // 删除值为undefined、空串、null的key
     for (let key in config.data) {
       if (
         config.data[key] === "" ||

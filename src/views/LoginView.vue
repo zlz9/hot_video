@@ -97,6 +97,8 @@ import type { FormInstance } from "element-plus";
 import { useRouter } from "vue-router";
 import { LoginApi } from "../api/index";
 import { ElMessage } from "element-plus";
+import { useUserStore } from "../store/user";
+const userStore = useUserStore();
 const router = useRouter();
 let imgUrl = ref("http://localhost:8088/api/captcha?");
 const ruleFormRef = ref<FormInstance>();
@@ -133,6 +135,10 @@ const submitForm = (formEl: FormInstance | undefined) => {
             dangerouslyUseHTMLString: true,
             message: "<h2>登录成功°꒰๑'ꀾ'๑꒱°</h2>",
           });
+          // 持久化储存token
+          localStorage.setItem("token", res.data.token);
+          // 存储到userStore
+          userStore.token = res.data.token;
         } else {
           ElMessage({
             dangerouslyUseHTMLString: true,

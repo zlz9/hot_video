@@ -1,9 +1,13 @@
 <template>
   <!-- 上传组件 -->
-  <div class="update-box">上传组件</div>
+  <div class="update-box">
+    <UploadVideo></UploadVideo>
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import UploadVideo from "../components/UploadVideo.vue";
+</script>
 
 <style lang="scss" scoped>
 .update-box {

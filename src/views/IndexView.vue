@@ -3,21 +3,23 @@
     <div class="swiper">
       <SwiperView :swiperList="swiperList"></SwiperView>
     </div>
-    <VideoContent :videoList="recommendVideo">
-      <template #title> 推荐 </template>
-    </VideoContent>
-    <VideoContent :videoList="lastVideo">
-      <template #title> 最新 </template>
-    </VideoContent>
-    <VideoContent :videoList="hotVideo">
-      <template #title> 热门 </template>
-    </VideoContent>
-    <VideoContent :videoList="funnyVideo">
-      <template #title> 搞笑 </template>
-    </VideoContent>
-    <VideoContent :videoList="gameVideo">
-      <template #title> 游戏 </template>
-    </VideoContent>
+    <div style="width: 1863px">
+      <VideoContent :videoList="recommendVideo">
+        <template #title> 推荐 </template>
+      </VideoContent>
+      <VideoContent :videoList="lastVideo">
+        <template #title> 最新 </template>
+      </VideoContent>
+      <VideoContent :videoList="hotVideo">
+        <template #title> 热门 </template>
+      </VideoContent>
+      <VideoContent :videoList="funnyVideo">
+        <template #title> 搞笑 </template>
+      </VideoContent>
+      <VideoContent :videoList="gameVideo">
+        <template #title> 游戏 </template>
+      </VideoContent>
+    </div>
   </div>
 </template>
 

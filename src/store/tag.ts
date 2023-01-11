@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
-export const useUserStore = defineStore("user", {
+export const useTagStore = defineStore("tag", {
   state: () => ({
-    token: "",
+    tag: new Array<tagRes>(),
   }),
   getters: {},
   actions: {},

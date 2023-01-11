@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div class="box-player">
     <div class="title">测试标题</div>
     <div class="player">
       <div class="video_player">
@@ -43,7 +43,7 @@ import CommentView from "../components/CommentView.vue";
 </script>
 
 <style lang="scss" scoped>
-.box {
+.box-player {
   position: relative;
   margin: 0 auto;
   .title {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="box">
+    <div class="box-hot">
       <div class="nav">
         <SwiperView :swiperList="swiperList"></SwiperView>
       </div>
@@ -171,7 +171,7 @@ const getPage = (pageParams: PageParams) => {
 </script>
 
 <style lang="scss" scoped>
-.box {
+.box-hot {
   margin: 0 auto;
   width: 1600px;
   height: 630px;
