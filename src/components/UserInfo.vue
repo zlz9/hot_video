@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="user-box" v-if="isShow" @click="cancel">
     <Transition>
-      <div class="user_info" v-if="isShow">
+      <div class="user_info">
         <div
           class="cancel_icon"
           style="display: flex; flex-direction: row-reverse; padding: 5px"
@@ -9,7 +9,8 @@
           <el-icon @click="cancel"><Close /></el-icon>
           <div class="user">
             <div class="account">
-              测试账号<svg
+              {{ userStore.userInfo.nickName
+              }}<svg
                 t="1672377067859"
                 class="icon"
                 viewBox="0 0 1024 1024"
@@ -159,6 +160,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useUserStore } from "../store/user";
+const userStore = useUserStore();
 const isShow = ref<boolean>(false);
 const router = useRouter();
 const traggle = () => {
@@ -169,7 +172,9 @@ const cancel = () => {
 };
 const logout = () => {
   // 清除token
-  localStorage.removeItem("token");
+  localStorage.clear();
+  userStore.token = "";
+  userStore.clearUser();
   router.push("/login");
 };
 defineExpose({
@@ -178,6 +183,16 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
+.user-box {
+  width: 1800px;
+  height: 1600px;
+  position: fixed;
+  z-index: 200;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
 a {
   text-decoration: none;
   color: #fff;

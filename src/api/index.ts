@@ -20,7 +20,13 @@ export const SwiperNewApi = (): Promise<RootObject<swiperRes>> => {
 export const LoginApi = (data: LoginParams): Promise<RootStringData> => {
   return requests({ url: "/api/login", params: data, method: "post" });
 };
-
+// 获取当前用户信息
+export const CurrentUserApi = (): Promise<RootRes<Author>> => {
+  return requests({
+    url: "/api/userinfo/current",
+    method: "get",
+  });
+};
 export const LogoutApi = () => {
   requests({
     url: "/api/logout",
@@ -102,10 +108,48 @@ export const HotVideoTopApi = (
 };
 export const VideoByTagApi = (
   page: PageParams
-): Promise<RootObject<VideoByTagRes>> => {
+): Promise<RootObject<VideoRes>> => {
   return requests({
     url: "/api/video/category",
     method: "get",
     params: page,
+  });
+};
+
+// 根据用户id查找视频列表
+export const VideoListByUserIdApi = (
+  id: number
+): Promise<RootObject<VideoRes>> => {
+  return requests({
+    url: `/api/video/user/${id}`,
+  });
+};
+// 根据id查找用户信息
+export const UserByIdApi = (id: number): Promise<RootRes<Author>> => {
+  return requests({
+    url: `/api/user/${id}`,
+    method: "get",
+  });
+};
+// 聊天模块
+export const chatListApi = (toUserId: any): Promise<RootObject<Chat>> => {
+  return requests({
+    url: `/api/chat/${toUserId}`,
+    method: "get",
+  });
+};
+
+export const sendMessageApi = (toUserId: any, msg: string) => {
+  return requests({
+    url: `/api/send/${toUserId}/${msg}`,
+    method: "get",
+  });
+};
+
+// 好友模块
+export const FriendListApi = (): Promise<RootObject<FriendListRes>> => {
+  return requests({
+    url: "/api/friend/list",
+    method: "get",
   });
 };

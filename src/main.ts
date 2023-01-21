@@ -10,7 +10,9 @@ import "vue3-video-play/dist/style.css"; // 引入css
 import "element-plus/theme-chalk/el-loading.css";
 import "element-plus/theme-chalk/el-message.css";
 import dayjs from "dayjs";
+import piniaPersist from "pinia-plugin-persist";
 const pinia = createPinia();
+pinia.use(piniaPersist);
 const app = createApp(App);
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component);

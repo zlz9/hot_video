@@ -11,6 +11,7 @@ export default defineConfig({
       "/api": {
         target: "http://nvzu.xxx.cn/", // 实际请求地址
         changeOrigin: true,
+        ws: true, //websocket代理设置
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },

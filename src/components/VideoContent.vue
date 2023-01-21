@@ -47,7 +47,7 @@
             <div class="play_icon"></div>
             <div class="play_back"></div>
             <!-- 视频介绍 -->
-            <div class="video_info">
+            <div class="video_info" @click.stop="goUserVideo(item.author.id)">
               <div class="author">
                 <div class="author_avatar">
                   <img v-lazy="item.author.avatar" alt="" />
@@ -73,6 +73,9 @@
 import day from "dayjs";
 import { useRouter } from "vue-router";
 const router = useRouter();
+const goUserVideo = (id: number) => {
+  router.push({ path: "uservideo", query: { id: id } });
+};
 const goPlayer = (id: number) => {
   router.push({ path: "/player", query: { id: id } });
 };
@@ -151,7 +154,7 @@ const props = defineProps({
     display: flex;
     background-color: $backgroud-color;
     text-align: center;
-    z-index: 2;
+    z-index: 3;
     font-family: $font-family;
     color: $font-color;
     bottom: 0px;
@@ -179,6 +182,7 @@ const props = defineProps({
       display: flex;
       flex-direction: column;
       align-items: center;
+
       .video_name {
         position: relative;
       }

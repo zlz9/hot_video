@@ -1,19 +1,36 @@
 <template>
   <!-- 私信组件 -->
   <div>
-    <div class="message-box">
-      <div class="head">小明同学</div>
+    <div
+      class="message-box"
+      v-if="friendInfo?.nickName"
+      style="width: 1200px; height: 800px"
+    >
+      <div class="head">{{ friendInfo?.nickName }}</div>
       <div id="chat-box" ref="$chatBox">
         <div
-          v-for="(item, index) in messageData"
-          :key="item.id"
-          :class="item.id == 2 ? 'atalk' : 'btalk'"
+          v-for="(item, index) in chatStore.chatList"
+          :class="item.sendUser.id == userStore.userInfo.id ? 'atalk' : 'btalk'"
         >
+          <!-- atalk是自己，btalk是朋友 -->
           <div>
-            <div class="name">{{ item.name }}</div>
-            <div class="message">{{ item.content }}</div>
+            <div class="name">
+              {{
+                item.sendUser.id == userStore.userInfo.id
+                  ? userStore.userInfo.nickName
+                  : friendInfo?.nickName
+              }}
+            </div>
+            <div class="message">{{ item.message }}</div>
             <div class="avatar">
-              <img v-lazy="" alt="" />
+              <img
+                v-lazy="
+                  item.sendUser.id == userStore.userInfo.id
+                    ? userStore.userInfo.avatar
+                    : friendInfo?.avatar
+                "
+                alt=""
+              />
             </div>
           </div>
         </div>
@@ -31,67 +48,132 @@
         </div>
       </div>
     </div>
+    <div v-else class="background-image">
+      <svg
+        t="1674220653065"
+        class="icon"
+        viewBox="0 0 1024 1024"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        p-id="3788"
+        width="1200"
+        height="800"
+      >
+        <path
+          d="M222.08 478.08h-1.28c-7.68 0-13.44-5.76-13.44-13.44s5.76-13.44 13.44-13.44h1.28c7.68 0 13.44 5.76 13.44 13.44s-5.76 13.44-13.44 13.44zM464.64 478.08h-3.2c-7.68 0-13.44-5.76-13.44-13.44s5.76-13.44 13.44-13.44h3.2c7.68 0 13.44 5.76 13.44 13.44s-5.76 13.44-13.44 13.44z m-60.16 0h-3.2c-7.68 0-13.44-5.76-13.44-13.44s5.76-13.44 13.44-13.44h3.2c7.68 0 13.44 5.76 13.44 13.44s-6.4 13.44-13.44 13.44z m-60.8 0h-3.2c-7.68 0-13.44-5.76-13.44-13.44s5.76-13.44 13.44-13.44h3.2c7.68 0 13.44 5.76 13.44 13.44s-6.4 13.44-13.44 13.44z m-60.8 0h-3.2c-7.68 0-13.44-5.76-13.44-13.44s5.76-13.44 13.44-13.44h3.2c7.68 0 13.44 5.76 13.44 13.44s-5.76 13.44-13.44 13.44zM523.52 478.08h-1.28c-7.68 0-13.44-5.76-13.44-13.44s5.76-13.44 13.44-13.44h1.28c7.68 0 13.44 5.76 13.44 13.44s-5.76 13.44-13.44 13.44z"
+          fill="#cdcdcd"
+          p-id="3789"
+        ></path>
+        <path
+          d="M677.12 553.6h-1.28c-7.68 0-13.44-5.76-13.44-13.44s5.76-13.44 13.44-13.44h1.28c7.68 0 13.44 5.76 13.44 13.44s-6.4 13.44-13.44 13.44zM779.52 553.6h-2.56c-7.68 0-13.44-5.76-13.44-13.44s5.76-13.44 13.44-13.44h2.56c7.68 0 13.44 5.76 13.44 13.44s-5.76 13.44-13.44 13.44z m-51.2 0h-2.56c-7.68 0-13.44-5.76-13.44-13.44s5.76-13.44 13.44-13.44h2.56c7.68 0 13.44 5.76 13.44 13.44s-5.76 13.44-13.44 13.44zM830.08 553.6h-1.28c-7.68 0-13.44-5.76-13.44-13.44s5.76-13.44 13.44-13.44h1.28c7.68 0 13.44 5.76 13.44 13.44s-5.76 13.44-13.44 13.44z"
+          fill="#cdcdcd"
+          p-id="3790"
+        ></path>
+        <path
+          d="M978.56 949.12c-1.28 0-2.56 0-3.2-0.64l-220.8-107.52c-25.6 6.4-51.84 10.24-78.72 10.24-83.2 0-161.28-32.64-219.52-90.88-3.2-3.2-3.2-7.68 0-10.88s7.68-3.2 10.88 0c55.68 55.68 129.92 86.4 209.28 86.4 26.24 0 52.48-3.2 77.44-10.24 1.92-0.64 3.84 0 5.12 0.64l200.32 97.28-93.44-149.12c-1.92-3.2-1.28-7.04 1.28-9.6 65.28-56.32 103.04-138.24 103.04-224 0-162.56-132.48-295.68-295.68-295.68-29.44 0-58.24 4.48-86.4 12.8-3.84 1.28-8.32-1.28-9.6-5.12-1.28-3.84 1.28-8.32 5.12-9.6 29.44-8.96 60.16-13.44 90.88-13.44 171.52 0 310.4 139.52 310.4 310.4 0 88.32-37.76 172.16-103.68 231.68l102.4 165.76c1.92 2.56 1.28 6.4-0.64 8.96-0.64 1.28-2.56 2.56-4.48 2.56z"
+          fill="#cdcdcd"
+          p-id="3791"
+        ></path>
+        <path
+          d="M69.12 874.24c-2.56 0-4.48-1.28-5.76-2.56-1.92-2.56-1.92-6.4 0-8.96l113.28-156.8C103.68 646.4 62.08 558.72 62.08 464.64c0-171.52 139.52-310.4 310.4-310.4 171.52 0 310.4 139.52 310.4 310.4s-139.52 310.4-310.4 310.4c-18.56 0-36.48-1.28-54.4-4.48l-245.76 103.04c-0.64 0.64-1.92 0.64-3.2 0.64zM372.48 168.96C209.28 168.96 76.8 301.44 76.8 464.64c0 92.16 41.6 176.64 114.56 233.6 3.2 2.56 3.84 7.04 1.28 10.24l-101.76 140.8L313.6 755.84c1.28-0.64 2.56-0.64 4.48-0.64 17.92 3.2 35.84 5.12 53.76 5.12 162.56 0 295.68-132.48 295.68-295.68 0-163.2-132.48-295.68-295.04-295.68z"
+          fill="#cdcdcd"
+          p-id="3792"
+        ></path>
+      </svg>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, nextTick, onMounted } from "vue";
+import { ref, reactive, nextTick, watch } from "vue";
+import { sendMessageApi } from "../api/index";
+import { useUserStore } from "../store/user";
+import { UserByIdApi, chatListApi } from "../api";
+import { useChatStore } from "../store/chat";
 import { ElMessage } from "element-plus";
+const chatStore = useChatStore();
+let friendInfo = ref<Author>({
+  id: 1,
+  avatar: "",
+  nickName: "",
+  selfIntroduction: "",
+});
+const userStore = useUserStore();
 const word = ref("");
 let $chatBox = ref();
-console.log($chatBox);
-
-const messageData = reactive([
-  {
-    id: 1,
-    name: "小周同学",
-    content: "早上好",
+const props = defineProps({
+  friendId: {
+    required: true,
+    type: Number,
   },
-  {
-    id: 2,
-    name: "小杨同学",
-    content: "早上好",
+});
+let user: Author = {
+  id: userStore.userInfo.id,
+  avatar: userStore.userInfo.avatar,
+  nickName: userStore.userInfo.nickName,
+  selfIntroduction: "",
+};
+// 构造参数
+let chatData: WsMsg = reactive({
+  message: word.value,
+  receiveUser: {
+    id: friendInfo.value.id,
+    nickName: friendInfo.value.nickName,
+    avatar: friendInfo.value.avatar,
+    selfIntroduction: friendInfo.value.selfIntroduction,
   },
-  {
-    id: 1,
-    name: "小周同学",
-    content: "早上好",
+  sendUser: {
+    id: userStore.userInfo.id,
+    nickName: userStore.userInfo.nickName,
+    avatar: userStore.userInfo.avatar,
+    selfIntroduction: userStore.userInfo.selfIntroduction,
   },
-  {
-    id: 2,
-    name: "小杨同学",
-    content: "早上好",
-  },
-  {
-    id: 1,
-    name: "小周同学",
-    content: "早上好",
-  },
-]);
-const sendMessage = async () => {
-  let message = {
-    id: 2,
-    content: word.value,
-    name: "小杨同学",
-  };
-  if (message.content == "") {
+});
+const sendMessage = () => {
+  chatData.receiveUser = friendInfo.value;
+  chatData.message = word.value;
+  if (chatData.message == "") {
     ElMessage({
-      type: "error",
-      message: "请输入内容",
+      type: "warning",
+      message: "请输入有效内容",
     });
     return;
   }
-  messageData.push(message);
-  word.value = "";
+  chatStore.chatList.push(chatData);
+  // 发送请求
+  sendMessageApi(friendInfo.value?.id, chatData.message).then((res) => {});
   nextTick(() => {
     $chatBox.value.scrollTop = $chatBox.value.scrollHeight;
   });
+  word.value = "";
 };
+
+watch(props, () => {
+  UserByIdApi(props.friendId).then((res) => {
+    if (res.code == 200) {
+      friendInfo.value = res.data;
+    }
+  });
+  // 监听当前联系人清空聊天列表
+  chatStore.chatList = [];
+  // 根据当前联系人发送信息
+  chatListApi(props.friendId).then((res) => {
+    if (res.code == 200) {
+      chatStore.chatList = res.data;
+    }
+  });
+});
 </script>
 
 <style lang="scss" scoped>
+.background-image {
+  width: 1200px;
+  height: 800px;
+  background-color: aliceblue;
+}
 .message-box {
-  width: 1400px;
+  padding: 5px;
+  width: 1200x;
   height: 800px;
   background-color: rgb(25, 74, 74);
   margin: 0 auto;
@@ -185,12 +267,14 @@ const sendMessage = async () => {
     }
     .input {
       height: 100%;
-      width: 1300px;
+      width: 1100px;
       font-size: 20px;
     }
     .btn {
-      height: 43px;
-      width: 95px;
+      height: 42px;
+      width: 96px;
+      position: relative;
+      bottom: 2px;
     }
   }
   ::-webkit-scrollbar {

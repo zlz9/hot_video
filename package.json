@@ -16,6 +16,7 @@
     "element-plus": "^2.2.27",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.28",
+    "pinia-plugin-persist": "^1.0.0",
     "swiper": "^8.4.5",
     "vue": "^3.2.41",
     "vue-router": "^4.1.6",

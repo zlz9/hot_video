@@ -5,7 +5,8 @@ import router from "../router";
 import "nprogress/nprogress.css";
 import nprogress from "nprogress";
 import { ElMessage } from "element-plus";
-
+//loading
+import { showLoading, hideLoading } from "../utils/loading";
 //对axios进行二次封装
 import axios from "axios";
 import { useUserStore } from "../store/user";
@@ -23,7 +24,8 @@ const requests = axios.create({
 requests.interceptors.request.use(
   function (config) {
     nprogress.start();
-
+    // 请求拦截进来调⽤显⽰loading效果
+    showLoading();
     config.headers = config.headers || {};
     const userStore = useUserStore();
     config.headers.token = userStore.token;
@@ -48,6 +50,10 @@ requests.interceptors.request.use(
 // 添加响应拦截器
 requests.interceptors.response.use(
   function (res) {
+    // 响应拦截进来隐藏loading效果，此处采⽤延时处理是合并loading请求效果，避免多次请求loading关闭⼜开启
+    setTimeout(() => {
+      hideLoading();
+    }, 200);
     console.log(res.data, "响应的东西");
     nprogress.done();
     if (res.data.code == 401) {

@@ -11,7 +11,12 @@
       </el-header>
       <el-main>
         <!-- 路由出口 -->
-        <router-view></router-view>
+        <!-- <router-view></router-view> -->
+        <router-view v-slot="{ Component }">
+          <keep-alive>
+            <component :is="Component" />
+          </keep-alive>
+        </router-view>
       </el-main>
       <el-backtop :bottom="100">
         <div class="go-top">
@@ -44,7 +49,7 @@ import NavView from "./NavView.vue";
 .el-backtop {
 }
 .common-layout {
-  width: 100%;
+  width: 1903px;
   // min-height: 900px;
   background-color: $backgroud-color;
   cursor: pointer;

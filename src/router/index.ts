@@ -85,8 +85,17 @@ const routes: Array<RouteRecordRaw> = [
         name: "message",
         meta: {
           title: "私信",
+          keepAlive: true,
         },
         component: () => import("../views/MessageView.vue"),
+      },
+      {
+        path: "/uservideo",
+        name: "uservideo",
+        meta: {
+          title: "用户视频",
+        },
+        component: () => import("../views/UserVideo.vue"),
       },
     ],
   },
