@@ -1,3 +1,4 @@
+`
 <template>
   <div class="box-player">
     <div class="title">测试标题</div>
@@ -40,6 +41,14 @@
 import VideoPlayer from "../components/VideoPlayer.vue";
 import Recommend from "../components/Recommend.vue";
 import CommentView from "../components/CommentView.vue";
+import { useRoute } from "vue-router";
+import { useUserStore } from "../store/user";
+import { watch } from "vue";
+const route = useRoute();
+const userStore = useUserStore();
+let id = route.query.id as unknown as number;
+//将id存入pinia
+userStore.VideoIds.push(id);
 </script>
 
 <style lang="scss" scoped>
@@ -88,3 +97,4 @@ import CommentView from "../components/CommentView.vue";
   }
 }
 </style>
+`

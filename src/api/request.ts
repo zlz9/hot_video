@@ -1,4 +1,5 @@
 import router from "../router";
+import qs from "qs";
 //引入login
 // import login from "@/store/login";
 // 引入进度条
@@ -39,6 +40,7 @@ requests.interceptors.request.use(
         delete config.data[key];
       }
     }
+
     return config;
   },
   function (error) {

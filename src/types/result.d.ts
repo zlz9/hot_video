@@ -95,3 +95,27 @@ interface WsMsg {
   sendUser: Author;
   status?: boolean;
 }
+
+interface Comment {
+  id: number;
+  videoId: number;
+  user: User;
+  toUser: User;
+  createTime: number;
+  parentId?: any;
+  content: string;
+  likeCount: number;
+  children: Child[];
+}
+
+interface Child {
+  id: number;
+  videoId: number;
+  user: Author;
+  toUser: Author;
+  createTime: number;
+  parentId: number;
+  content: string;
+  likeCount: number;
+  children?: any;
+}

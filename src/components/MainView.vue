@@ -49,7 +49,7 @@ import NavView from "./NavView.vue";
 .el-backtop {
 }
 .common-layout {
-  width: 1883;
+  width: 1900;
   // min-height: 900px;
   background-color: $backgroud-color;
   cursor: pointer;

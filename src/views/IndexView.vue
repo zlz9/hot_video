@@ -3,7 +3,7 @@
     <div class="swiper">
       <SwiperView :swiperList="swiperList"></SwiperView>
     </div>
-    <div style="width: 1863px">
+    <div style="width: 1832px">
       <VideoContent :videoList="recommendVideo">
         <template #title> 推荐 </template>
       </VideoContent>

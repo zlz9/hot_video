@@ -3,12 +3,14 @@ export const useUserStore = defineStore("user", {
   state: () => ({
     token: "",
     userInfo: {} as Author,
+    VideoIds: new Array<number>(),
   }),
   getters: {},
   actions: {
     clearUser() {
       this.token = "";
       this.userInfo = {} as Author;
+      this.VideoIds = [];
     },
   },
   persist: {

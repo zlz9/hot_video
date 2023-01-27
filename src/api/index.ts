@@ -1,4 +1,5 @@
 import requests from "./request";
+import qs from "qs";
 /**
  * swiper模块
  */
@@ -68,6 +69,12 @@ export const getVideoByTagApi = (id: number) => {
 /**
  * 视频
  */
+// /api/video/history
+export const videoHistoryApi = (ids: string): Promise<RootObject<VideoRes>> =>
+  requests({
+    url: `/api/video/history/ids=${ids}`,
+  });
+
 export const FunnyVideoApi = (): Promise<RootObject<VideoRes>> => {
   return requests({
     url: "/api/video/funny",
@@ -174,5 +181,16 @@ export const FriendListApi = (): Promise<RootObject<FriendListRes>> => {
   return requests({
     url: "/api/friend/list",
     method: "get",
+  });
+};
+/**
+ * 评论模块
+ */
+export const CommentApi = (
+  params: CommentPage
+): Promise<RootObject<Comment>> => {
+  return requests({
+    url: "/api/comment",
+    params,
   });
 };

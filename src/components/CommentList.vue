@@ -6,45 +6,43 @@
         <div class="comment-box">
           <div class="user">
             <div class="avatar" style="width: 50px; height: 50px">
-              <div class="user-name">
-                {{ item.author.nickName }}
-              </div>
-              <img v-lazy:src="item.author.avator" alt="" />
+              <div class="user-name">{{ item.user.nickName }}</div>
+              <img v-lazy:src="item.user.avatar" alt="" />
             </div>
           </div>
           <div class="content-info">
             <!-- 评论内容 -->
             <div class="content">{{ item.content }}</div>
-            <div class="create_time">{{ item.createDate }}</div>
+            <div class="create_time">{{ item.createTime }}</div>
           </div>
           <div
             class="reply-total"
             @click="showReply"
-            v-show="item.childrens.length >= 1"
+            v-show="item.children.length >= 1"
           >
-            共{{ item.childrens.length }}条回复-{{ isFold ? "折叠" : "展开" }}
+            共{{ item.children.length }}条回复-{{ isFold ? "折叠" : "展开" }}
           </div>
         </div>
         <!-- 二级评论 -->
         <div
           class="comment-two"
-          v-for="(subItem, index) in item.childrens"
+          v-for="(subItem, index) in item.children"
           v-show="isShow"
         >
           <div class="comment-box">
             <div class="user">
               <div class="user-name">
-                {{ subItem.author.nickName }}
+                {{ subItem.toUser.nickName }}
                 <span style="color: aqua">回复 </span
                 ><span style="color: brown">{{ subItem.toUser.nickName }}</span>
               </div>
               <div class="avatar">
-                <img v-lazy:src="subItem.author.avator" alt="" />
+                <img v-lazy:src="subItem.toUser.avatar" alt="" />
               </div>
             </div>
             <div class="content-info">
               <div class="content">{{ subItem.content }}</div>
-              <div class="create_time">{{ subItem.createDate }}</div>
+              <div class="create_time">{{ subItem.createTime }}</div>
             </div>
           </div>
         </div>
@@ -56,6 +54,7 @@
 
 <script setup lang="ts">
 import { reactive, ref, computed } from "vue";
+import { CommentApi } from "../api";
 const isShow = ref<boolean>(false);
 const isFold = ref<boolean>(false);
 const showReply = () => {
@@ -63,138 +62,29 @@ const showReply = () => {
   isFold.value = !isFold.value;
 };
 let total = ref<number>(0);
-
-interface RootObject {
-  id: number;
-  author: Author;
-  content: string;
-  articleId: number;
-  parentId: number;
-  toUser?: any;
-  level: number;
-  createDate: number;
-  childrens: Children[];
-}
-
-interface Children {
-  id: number;
-  author: Author;
-  content: string;
-  articleId: number;
-  parentId: number;
-  toUser: Author;
-  level: number;
-  createDate: number;
-  childrens?: any;
-}
-
-interface Author {
-  id: string;
-  nickName: string;
-  avator: string;
-  motto: string;
-  birthday: number;
-}
-const commentList = reactive<RootObject[]>([
-  {
-    id: 106,
-    author: {
-      id: "1",
-      nickName: "小Z不吃韭菜",
-      avator:
-        "http://qiniu.zhoulizheng.cn/43507260-9412-4a12-88f4-eddb2c3a858f.jpg",
-      motto: "这是内卷的时代，这是卷王的时代，这是我的时代",
-      birthday: 1231313131,
-    },
-    content: "评论一下",
-    articleId: 146,
-    parentId: 0,
-    toUser: null,
-    level: 1,
-    createDate: 1673264293469,
-    childrens: [],
-  },
-  {
-    id: 104,
-    author: {
-      id: "1",
-      nickName: "小Z不吃韭菜",
-      avator:
-        "http://qiniu.zhoulizheng.cn/43507260-9412-4a12-88f4-eddb2c3a858f.jpg",
-      motto: "这是内卷的时代，这是卷王的时代，这是我的时代",
-      birthday: 1231313131,
-    },
-    content: "测试评论",
-    articleId: 146,
-    parentId: 0,
-    toUser: null,
-    level: 1,
-    createDate: 1673251448635,
-    childrens: [
-      {
-        id: 105,
-        author: {
-          id: "1",
-          nickName: "小Z不吃韭菜",
-          avator:
-            "http://qiniu.zhoulizheng.cn/43507260-9412-4a12-88f4-eddb2c3a858f.jpg",
-          motto: "这是内卷的时代，这是卷王的时代，这是我的时代",
-          birthday: 1231313131,
-        },
-        content: "测试回复评论",
-        articleId: 146,
-        parentId: 104,
-        toUser: {
-          id: "1",
-          nickName: "小Z不吃韭菜",
-          avator:
-            "http://qiniu.zhoulizheng.cn/43507260-9412-4a12-88f4-eddb2c3a858f.jpg",
-          motto: "这是内卷的时代，这是卷王的时代，这是我的时代",
-          birthday: 1231313131,
-        },
-        level: 2,
-        createDate: 1673251461005,
-        childrens: null,
-      },
-      {
-        id: 106,
-        author: {
-          id: "1",
-          nickName: "小Z不吃韭菜",
-          avator:
-            "http://qiniu.zhoulizheng.cn/43507260-9412-4a12-88f4-eddb2c3a858f.jpg",
-          motto: "这是内卷的时代，这是卷王的时代，这是我的时代",
-          birthday: 1231313131,
-        },
-        content: "测试回复评论",
-        articleId: 146,
-        parentId: 104,
-        toUser: {
-          id: "1",
-          nickName: "小Z不吃韭菜",
-          avator:
-            "http://qiniu.zhoulizheng.cn/43507260-9412-4a12-88f4-eddb2c3a858f.jpg",
-          motto: "这是内卷的时代，这是卷王的时代，这是我的时代",
-          birthday: 1231313131,
-        },
-        level: 2,
-        createDate: 1673251461005,
-        childrens: null,
-      },
-    ],
-  },
-]);
+let CommentPage = reactive({
+  id: 1,
+  page: 0,
+  pageSize: 10,
+});
+let commentList = ref<Comment[]>([]);
+// 评论总数
 const replyTotal = () => {
-  commentList.forEach((item) => {
+  commentList.value.forEach((item) => {
     total.value++;
-    if (item.childrens.length != 0) {
-      item.childrens.forEach((subItem) => {
+    if (item.children.length != 0) {
+      item.children.forEach((subItem) => {
         total.value++;
       });
     }
   });
 };
 replyTotal();
+
+CommentApi(CommentPage).then((res) => {
+  commentList.value = res.data;
+});
+console.log(commentList, "commentList");
 </script>
 
 <style lang="scss" scoped>

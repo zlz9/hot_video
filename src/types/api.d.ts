@@ -15,3 +15,9 @@ interface RegisterParams {
   userName: string;
   code: string;
 }
+
+interface CommentPage {
+  id: number;
+  page: number;
+  pageSize: number;
+}
