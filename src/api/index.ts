@@ -132,14 +132,37 @@ export const UserByIdApi = (id: number): Promise<RootRes<Author>> => {
   });
 };
 // 聊天模块
-export const chatListApi = (toUserId: any): Promise<RootObject<Chat>> => {
+// export const chatListApi = (toUserId: any): Promise<RootObject<Chat>> => {
+//   return requests({
+//     url: `/api/chat/${toUserId}`,
+//     method: "get",
+//   });
+// };
+
+// 获取最新的聊天列表
+export const newChatListApi = (toUserId: any) => {
   return requests({
-    url: `/api/chat/${toUserId}`,
+    url: `/api/chat/new/${toUserId}`,
     method: "get",
   });
 };
 
-export const sendMessageApi = (toUserId: any, msg: string) => {
+// 获取更多聊天列表
+export const moreChatListApi = (
+  toUserId: any,
+  page: any,
+  pageSize: any
+): Promise<RootObject<WsMsg>> => {
+  return requests({
+    url: `/api/chat/more/${toUserId}/${page}/${pageSize}`,
+    method: "get",
+  });
+};
+
+export const sendMessageApi = (
+  toUserId: any,
+  msg: string
+): Promise<RootObject<WsMsg>> => {
   return requests({
     url: `/api/send/${toUserId}/${msg}`,
     method: "get",

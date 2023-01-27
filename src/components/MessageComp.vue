@@ -9,6 +9,17 @@
       <div class="head">{{ friendInfo?.nickName }}</div>
       <div id="chat-box" ref="$chatBox">
         <div
+          style="
+            display: flex;
+            justify-content: center;
+            position: relative;
+            top: 5px;
+          "
+        >
+          <el-link type="primary" @click="showMore">加载更多...</el-link>
+        </div>
+        <!-- 聊天列表 -->
+        <div
           v-for="(item, index) in chatStore.chatList"
           :class="item.sendUser.id == userStore.userInfo.id ? 'atalk' : 'btalk'"
         >
@@ -88,7 +99,7 @@
 import { ref, reactive, nextTick, watch } from "vue";
 import { sendMessageApi } from "../api/index";
 import { useUserStore } from "../store/user";
-import { UserByIdApi, chatListApi } from "../api";
+import { UserByIdApi, newChatListApi, moreChatListApi } from "../api";
 import { useChatStore } from "../store/chat";
 import { ElMessage } from "element-plus";
 const chatStore = useChatStore();
@@ -101,11 +112,17 @@ let friendInfo = ref<Author>({
 const userStore = useUserStore();
 const word = ref("");
 let $chatBox = ref();
+
 const props = defineProps({
   friendId: {
     required: true,
     type: Number,
   },
+});
+const pageParams = reactive({
+  page: 1,
+  pageSize: 10,
+  toUserId: 2,
 });
 let user: Author = {
   id: userStore.userInfo.id,
@@ -148,6 +165,19 @@ const sendMessage = () => {
   word.value = "";
 };
 
+const showMore = () => {
+  // 查询更多消息
+  let { page, pageSize } = pageParams;
+  let toUserId = props.friendId;
+  console.log(pageParams, "pageParams");
+
+  moreChatListApi(toUserId, page, pageSize).then((res) => {
+    res.data.forEach((item) => {
+      chatStore.chatList.unshift(item);
+    });
+  });
+};
+
 watch(props, () => {
   UserByIdApi(props.friendId).then((res) => {
     if (res.code == 200) {
@@ -156,11 +186,9 @@ watch(props, () => {
   });
   // 监听当前联系人清空聊天列表
   chatStore.chatList = [];
-  // 根据当前联系人发送信息
-  chatListApi(props.friendId).then((res) => {
-    if (res.code == 200) {
-      chatStore.chatList = res.data;
-    }
+  // 根据当前联系人获取最新信息
+  newChatListApi(props.friendId).then((res) => {
+    chatStore.chatList = res.data;
   });
 });
 </script>
