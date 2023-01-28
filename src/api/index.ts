@@ -75,6 +75,12 @@ export const videoHistoryApi = (ids: string): Promise<RootObject<VideoRes>> =>
     url: `/api/video/history/ids=${ids}`,
   });
 
+export const delVideoApi = (id: number): Promise<RootString> => {
+  return requests({
+    url: `/api/admin/delete/${id}`,
+    method: "post",
+  });
+};
 export const FunnyVideoApi = (): Promise<RootObject<VideoRes>> => {
   return requests({
     url: "/api/video/funny",

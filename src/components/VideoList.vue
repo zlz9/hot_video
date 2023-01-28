@@ -7,15 +7,11 @@
       </div>
       <div class="video_list">
         <el-row :gutter="20">
-          <el-col
-            :span="6"
-            v-for="(item, index) in props.videoData"
-            @click="goPlayer(item.id)"
-          >
+          <el-col :span="6" v-for="(item, index) in props.videoData">
             <div class="content">
               <img v-lazy="item.cover" alt="" />
               <div class="play_icon"></div>
-              <div class="play_back"></div>
+              <div class="play_back" @click="goPlayer(item.id)"></div>
               <!-- 视频介绍 -->
               <div class="video_info">
                 <div class="author">
@@ -31,6 +27,9 @@
                     上传时间-{{ day(item.createTime).format("YYYY-MM-DD") }}
                   </div>
                 </div>
+                <div class="delete" @click="deleteVideo(item.id)">
+                  <slot name="delet"></slot>
+                </div>
               </div>
             </div>
           </el-col>
@@ -43,8 +42,13 @@
 <script setup lang="ts">
 import { PropType } from "vue";
 import day from "dayjs";
+import { ElMessage } from "element-plus";
 import { useRouter } from "vue-router";
+import { delVideoApi } from "../api/index";
 const router = useRouter();
+const emit = defineEmits<{
+  (e: "reload"): void;
+}>();
 const goPlayer = (id: number) => {
   router.push({ path: "/player", query: { id: id } });
 };
@@ -56,9 +60,26 @@ const props = defineProps({
     required: true,
   },
 });
+const deleteVideo = (id: number) => {
+  delVideoApi(id).then((res) => {
+    if (res.code == 200) {
+      ElMessage({
+        type: "success",
+        message: "删除成功！",
+      });
+      // 删除后重新加载
+      emit("reload");
+    }
+  });
+};
 </script>
 
 <style lang="scss" scoped>
+.delete {
+  width: 73px;
+  line-height: 62px;
+  z-index: 200;
+}
 .title {
   font-size: $font-title;
   font-family: $font-family;
@@ -104,7 +125,7 @@ const props = defineProps({
       background: black;
       display: block;
       width: 100%;
-      height: 100%;
+      height: 80%;
       position: absolute;
       opacity: 0.1;
       z-index: 3;
