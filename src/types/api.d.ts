@@ -21,3 +21,8 @@ interface CommentPage {
   page: number;
   pageSize: number;
 }
+
+interface LikeParams {
+  infoId: number;
+  userId: number;
+}

@@ -11,12 +11,12 @@
       </el-header>
       <el-main>
         <!-- 路由出口 -->
-        <!-- <router-view></router-view> -->
-        <router-view v-slot="{ Component }">
+        <router-view></router-view>
+        <!-- <router-view v-slot="{ Component }">
           <keep-alive>
             <component :is="Component" />
           </keep-alive>
-        </router-view>
+        </router-view> -->
       </el-main>
       <el-backtop :bottom="100">
         <div class="go-top">

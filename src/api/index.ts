@@ -184,7 +184,7 @@ export const FriendListApi = (): Promise<RootObject<FriendListRes>> => {
   });
 };
 /**
- * 评论模块
+ * 评论模块与点赞
  */
 export const CommentApi = (
   params: CommentPage
@@ -192,5 +192,26 @@ export const CommentApi = (
   return requests({
     url: "/api/comment",
     params,
+  });
+};
+
+export const likeCountByIdApi = (id: number): Promise<RootRes<number>> => {
+  return requests({
+    url: `/api/comment/count/${id}`,
+  });
+};
+export const likeCommentApi = (params: LikeParams): Promise<RootString> => {
+  return requests({
+    url: "/api/comment/like",
+    params,
+    method: "post",
+  });
+};
+
+export const disLikeCommentApi = (params: LikeParams): Promise<RootString> => {
+  return requests({
+    url: "/api/comment/dislike",
+    params,
+    method: "post",
   });
 };
