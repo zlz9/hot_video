@@ -57,14 +57,6 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("../views/UpdateView.vue"),
       },
       {
-        path: "/collection",
-        name: "collection",
-        meta: {
-          title: "收藏",
-        },
-        component: () => import("../views/CollectionView.vue"),
-      },
-      {
         path: "/history",
         name: "history",
         meta: {

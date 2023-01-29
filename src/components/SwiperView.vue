@@ -50,8 +50,8 @@ const router = useRouter();
 const onSwiper = () => {};
 const onSlideChange = () => {};
 const modules = [Autoplay, Pagination, Navigation, EffectFade];
-const goPlayer = (id) => {
-  router.push("/player");
+const goPlayer = (id: number) => {
+  router.push({ path: "/player", query: { id: id } });
 };
 </script>
 

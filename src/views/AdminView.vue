@@ -3,7 +3,7 @@
   <div class="admin-box" v-if="isShow">
     <VideoList :video-data="videoData" @reload="reload">
       <template #title>
-        <div>管理</div>
+        <div>管理-共{{ total }}个视频</div>
       </template>
       <template #delet
         ><svg
@@ -73,9 +73,11 @@ import { VideoListByUserIdApi } from "../api";
 let videoData = ref<VideoRes[]>([]);
 const isShow = ref(true);
 const userStore = useUserStore();
+let total = ref();
 let userId = userStore.userInfo.id;
 VideoListByUserIdApi(userId).then((res) => {
   videoData.value = res.data;
+  total.value = res.data.length;
   if (res.data.length === 0) {
     isShow.value = !isShow.value;
   }
