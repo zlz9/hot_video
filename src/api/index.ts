@@ -221,3 +221,10 @@ export const disLikeCommentApi = (params: LikeParams): Promise<RootString> => {
     method: "post",
   });
 };
+export const publishCommentApi = (params: any): Promise<RootString> => {
+  return requests({
+    url: "/api/publsh/comment",
+    method: "post",
+    data: params,
+  });
+};

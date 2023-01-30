@@ -16,19 +16,44 @@
         v-model="comment"
         placeholder="评论"
         style="height: 50px; width: 1300px"
+        @keyup.enter.native="publish"
       />
       <span>
-        <el-button style="position: relative; height: 50px">发布评论</el-button>
+        <el-button style="position: relative; height: 50px" @click="publish"
+          >发布评论</el-button
+        >
       </span>
     </div>
-    <CommentList></CommentList>
+    <CommentList :publish="publish"></CommentList>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, reactive } from "vue";
+import { ElMessage } from "element-plus";
 import CommentList from "./CommentList.vue";
-const comment = ref<string>();
+import { publishCommentApi } from "../api";
+import { useRoute } from "vue-router";
+import { useUserStore } from "../store/user";
+const userStore = useUserStore();
+const route = useRoute();
+let videoId = ref(route.query.id as unknown as number);
+const comment = ref<string>("");
+let CommentParams = {
+  content: "",
+  videoId: videoId.value,
+};
+const publish = () => {
+  CommentParams.content = comment.value;
+  console.log(CommentParams, "CommentParams");
+  publishCommentApi(CommentParams).then((res) => {
+    if (res.code == 200) {
+      ElMessage({
+        message: `${res.msg}`,
+      });
+    }
+  });
+};
 </script>
 
 <style lang="scss" scoped>

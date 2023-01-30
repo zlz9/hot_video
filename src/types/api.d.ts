@@ -26,3 +26,11 @@ interface LikeParams {
   infoId: number;
   userId: number;
 }
+
+interface Comment {
+  content: any;
+  level: any;
+  parentId: any;
+  toUserId: any;
+  videoId: any;
+}

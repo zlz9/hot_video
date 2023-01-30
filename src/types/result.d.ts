@@ -106,6 +106,8 @@ interface Comment {
   content: string;
   likeCount: number;
   children: Child[];
+  status: boolean;
+  show: boolean;
 }
 
 interface Child {
@@ -117,5 +119,7 @@ interface Child {
   parentId: number;
   content: string;
   likeCount: number;
+  show: boolean;
+  status: boolean;
   children?: any;
 }
