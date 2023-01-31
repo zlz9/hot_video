@@ -153,7 +153,7 @@ export const UserByIdApi = (id: number): Promise<RootRes<Author>> => {
 // };
 
 // 获取最新的聊天列表
-export const newChatListApi = (toUserId: any) => {
+export const newChatListApi = (toUserId: any): Promise<RootObject<WsMsg>> => {
   return requests({
     url: `/api/chat/new/${toUserId}`,
     method: "get",

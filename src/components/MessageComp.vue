@@ -187,6 +187,9 @@ watch(props, () => {
   chatStore.chatList = [];
   // 根据当前联系人获取最新信息
   newChatListApi(props.friendId).then((res) => {
+    if (res.code == 400) {
+      return;
+    }
     chatStore.chatList = res.data;
   });
 });
