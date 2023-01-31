@@ -5,7 +5,11 @@ export const useChatStore = defineStore("chat", {
     friendList: new Array<FriendListRes>(),
   }),
   getters: {},
-  actions: {},
+  actions: {
+    pushChatList(data: WsMsg) {
+      this.chatList.push(data);
+    },
+  },
   persist: {
     enabled: true,
     strategies: [

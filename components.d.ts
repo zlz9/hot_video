@@ -43,6 +43,7 @@ declare module '@vue/runtime-core' {
     Recommend: typeof import('./src/components/Recommend.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SearchRecommend: typeof import('./src/components/SearchRecommend.vue')['default']
     SearchView: typeof import('./src/components/SearchView.vue')['default']
     SwiperView: typeof import('./src/components/SwiperView.vue')['default']
     UpdateComp: typeof import('./src/components/UpdateComp.vue')['default']

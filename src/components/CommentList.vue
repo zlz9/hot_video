@@ -55,7 +55,9 @@
                   </svg></div
               ></span>
             </div>
-            <div class="create_time">{{ item.createTime }}</div>
+            <div class="create_time">
+              {{ day(item.createTime).format("YYYY/MM/DD") }}
+            </div>
             <!-- 回复框 -->
             <div class="reply-message" v-if="item.show">
               <el-input
@@ -108,7 +110,11 @@
               </div>
             </div>
             <div class="content-info">
-              <div class="content" @click="showSubComment(subItem)">
+              <div
+                class="content"
+                @click="showSubComment(subItem)"
+                style="position: relative; bottom: 8px"
+              >
                 {{ subItem.content }}
                 <!-- 点赞 -->
                 <span
@@ -159,7 +165,9 @@
                   "
                 />
               </div>
-              <div class="create_time">{{ subItem.createTime }}</div>
+              <div class="create_time">
+                {{ day(subItem.createTime).format("YYYY/MM/DD") }}
+              </div>
             </div>
           </div>
         </div>
@@ -172,6 +180,7 @@
 <script setup lang="ts">
 import { reactive, ref, watch } from "vue";
 import { useUserStore } from "../store/user";
+import day from "dayjs";
 import {
   CommentApi,
   likeCountByIdApi,

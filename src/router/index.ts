@@ -89,6 +89,14 @@ const routes: Array<RouteRecordRaw> = [
         },
         component: () => import("../views/UserVideo.vue"),
       },
+      {
+        path: "/videores",
+        name: "videores",
+        meta: {
+          title: "搜索结果",
+        },
+        component: () => import("../views/VideoList.vue"),
+      },
     ],
   },
   {

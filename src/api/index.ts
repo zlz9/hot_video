@@ -228,3 +228,20 @@ export const publishCommentApi = (params: any): Promise<RootString> => {
     data: params,
   });
 };
+
+// 搜索模块 /api/search/top
+
+export const searchTopApi = (): Promise<RootObject<String>> => {
+  return requests({
+    url: "/api/search/top",
+  });
+};
+
+export const searchVideoApi = (
+  title: String
+): Promise<RootObject<VideoRes>> => {
+  return requests({
+    url: `/api/video/search/${title}`,
+    method: "get",
+  });
+};

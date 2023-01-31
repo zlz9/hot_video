@@ -156,7 +156,7 @@ const sendMessage = () => {
     });
     return;
   }
-  chatStore.chatList.push(chatData);
+  chatStore.pushChatList(chatData);
   // 发送请求
   sendMessageApi(friendInfo.value?.id, chatData.message).then((res) => {});
   nextTick(() => {
@@ -169,7 +169,6 @@ const showMore = () => {
   // 查询更多消息
   let { page, pageSize } = pageParams;
   let toUserId = props.friendId;
-  console.log(pageParams, "pageParams");
 
   moreChatListApi(toUserId, page, pageSize).then((res) => {
     res.data.forEach((item) => {
