@@ -19,7 +19,7 @@
                 ><div @click.stop="like(item)" class="like-comment">
                   {{ item.likeCount
                   }}<svg
-                    v-if="item.status"
+                    v-if="item.status ? false : true"
                     t="1674868601345"
                     class="icon"
                     viewBox="0 0 1024 1024"
@@ -115,7 +115,7 @@
                   ><div @click.stop="subLike(subItem)" class="like-comment">
                     {{ subItem.likeCount
                     }}<svg
-                      v-if="!subItem.status"
+                      v-if="subItem.status ? false : true"
                       t="1674868601345"
                       class="icon"
                       viewBox="0 0 1024 1024"
@@ -240,6 +240,9 @@ const like = (item: Comment) => {
       item.likeCount++;
     } else {
       disLikeCommentApi(likeParams).then((res) => {
+        if (item.likeCount == 0) {
+          return;
+        }
         item.likeCount--;
         item.status = !item.status;
       });
@@ -253,7 +256,7 @@ const subLike = (item: Comment) => {
   likeParams.infoId = item.id;
   likeCommentApi(likeParams).then((res) => {
     if (res.code == 200) {
-      item.status = false;
+      item.status = true;
       item.likeCount++;
     } else {
       disLikeCommentApi(likeParams).then((res) => {
