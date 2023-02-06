@@ -1,10 +1,12 @@
 <template>
   <router-view></router-view>
+  <FooterView></FooterView>
 </template>
 <script setup lang="ts">
 import { useUserStore } from "./store/user";
 import { CurrentUserApi } from "./api/index";
 import { useChatStore } from "./store/chat";
+import FooterView from "./components/FooterView.vue";
 const userStore = useUserStore();
 const chatStore = useChatStore();
 CurrentUserApi()

@@ -33,6 +33,7 @@ declare module '@vue/runtime-core' {
     ElRow: typeof import('element-plus/es')['ElRow']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElUpload: typeof import('element-plus/es')['ElUpload']
+    FooterView: typeof import('./src/components/FooterView.vue')['default']
     FriendList: typeof import('./src/components/FriendList.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     MainView: typeof import('./src/components/MainView.vue')['default']

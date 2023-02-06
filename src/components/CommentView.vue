@@ -394,6 +394,7 @@ const showSubComment = (subItem: Child) => {
 <style lang="scss" scoped>
 .comment-box {
   color: $font-color;
+  min-height: 500px;
   .comment-user {
     display: flex;
     align-items: center;

@@ -197,7 +197,6 @@ const resetForm = (formEl: FormInstance | undefined) => {
   width: 100%;
   min-height: 1200px;
   margin: 0;
-  bottom: 20px;
 }
 .box {
   position: relative;

@@ -23,13 +23,14 @@
           <img src="../assets/img/可爱01.gif" alt="" />
         </div>
       </el-backtop>
-      <el-footer>Footer</el-footer>
+      <el-footer></el-footer>
     </el-container>
   </div>
 </template>
 
 <script setup lang="ts">
 import NavView from "./NavView.vue";
+import FooterView from "./FooterView.vue";
 </script>
 
 <style lang="scss">
@@ -58,7 +59,10 @@ import NavView from "./NavView.vue";
     height: 100px;
   }
   .el-main {
-    min-height: 900px;
+    min-height: 1200px;
+  }
+  .el-footer {
+    width: 1916px;
   }
 }
 </style>
