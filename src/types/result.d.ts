@@ -108,6 +108,7 @@ interface Comment {
   children: Child[];
   status: boolean;
   show: boolean;
+  fold: boolean;
 }
 
 interface Child {
@@ -122,4 +123,5 @@ interface Child {
   show: boolean;
   status: boolean;
   children?: any;
+  fold: boolean;
 }
