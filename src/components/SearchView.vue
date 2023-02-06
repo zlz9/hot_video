@@ -2,7 +2,7 @@
   <div class="search">
     <el-input
       v-model="search"
-      placeholder="搜你想搜、找你想找"
+      placeholder="宁可错字,不要少字"
       :prefix-icon="Search"
       clearable
       @focus="focus"
@@ -11,16 +11,15 @@
     >
     </el-input>
     <!-- 推荐 -->
-    <div class="recommend" v-if="isShow">
+    <!-- 暂时去掉推荐搜索 -->
+    <!-- <div class="recommend" v-if="isShow">
       <SearchRecommend></SearchRecommend>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script setup lang="ts">
 import { Search } from "@element-plus/icons-vue";
-import { ElMessage } from "element-plus";
-import SearchRecommend from "./SearchRecommend.vue";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 const router = useRouter();

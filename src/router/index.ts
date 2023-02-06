@@ -97,6 +97,14 @@ const routes: Array<RouteRecordRaw> = [
         },
         component: () => import("../views/VideoList.vue"),
       },
+      {
+        path: "/userupload",
+        name: "userupload",
+        meta: {
+          title: "用户上传",
+        },
+        component: () => import("../views/UserUpload.vue"),
+      },
     ],
   },
   {

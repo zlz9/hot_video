@@ -9,8 +9,10 @@
           <el-icon @click="cancel"><Close /></el-icon>
           <div class="user">
             <div class="account">
-              {{ userStore.userInfo.nickName
-              }}<svg
+              <router-link to="/userupload">
+                {{ userStore.userInfo.nickName }}</router-link
+              >
+              <svg
                 t="1672377067859"
                 class="icon"
                 viewBox="0 0 1024 1024"
@@ -156,6 +158,7 @@ const logout = () => {
   localStorage.clear();
   userStore.token = "";
   userStore.clearUser();
+  userStore.VideoIds = [];
   router.push("/login");
 };
 defineExpose({

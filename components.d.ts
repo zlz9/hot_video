@@ -48,6 +48,7 @@ declare module '@vue/runtime-core' {
     SwiperView: typeof import('./src/components/SwiperView.vue')['default']
     UpdateComp: typeof import('./src/components/UpdateComp.vue')['default']
     UploadComp: typeof import('./src/components/UploadComp.vue')['default']
+    UploadDetails: typeof import('./src/components/UploadDetails.vue')['default']
     UploadVideo: typeof import('./src/components/UploadVideo.vue')['default']
     UserInfo: typeof import('./src/components/UserInfo.vue')['default']
     UserView: typeof import('./src/components/UserView.vue')['default']

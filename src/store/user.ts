@@ -4,6 +4,7 @@ export const useUserStore = defineStore("user", {
     token: "",
     userInfo: {} as Author,
     VideoIds: new Array<number>(),
+    nickName: "",
   }),
   getters: {},
   actions: {

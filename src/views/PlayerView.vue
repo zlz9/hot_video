@@ -1,7 +1,7 @@
 `
 <template>
   <div class="box-player">
-    <div class="title">测试标题</div>
+    <div class="title">{{ videoInfo.name }}</div>
     <div class="player">
       <div class="video_player">
         <VideoPlayer></VideoPlayer>
@@ -13,9 +13,9 @@
     <div class="video_info">
       <div class="author">
         <div class="avatar">
-          <img src="../assets/img/可爱01.gif" alt="" />
+          <img v-lazy="videoInfo.author.avatar" alt="" />
         </div>
-        <div class="nick_name">测试名称</div>
+        <div class="nick_name">{{ videoInfo.author.nickName }}</div>
       </div>
       <div
         style="
@@ -28,9 +28,11 @@
         "
       >
         <div class="summary">
-          一夜间惨变孤儿的张小凡被青云门收为弟子，经过五年刻苦修炼，他在师门七脉会武上大放异彩，后被派往空桑山打探魔教行迹，旅程中，他与师姐陆雪琪遭遇危难，并结识救护了魔教女子碧瑶，同时，新的危险也在前方等待着他。
+          {{ videoInfo.selfIntroduction }}
         </div>
-        <div class="date">1999-12-12</div>
+        <div class="date">
+          {{ day(videoInfo.createTime).format("YYYY/MM/DD") }}
+        </div>
       </div>
     </div>
     <CommentView></CommentView>
@@ -41,14 +43,33 @@
 import VideoPlayer from "../components/VideoPlayer.vue";
 import Recommend from "../components/Recommend.vue";
 import CommentView from "../components/CommentView.vue";
+import day from "dayjs";
 import { useRoute } from "vue-router";
 import { useUserStore } from "../store/user";
-import { watch } from "vue";
+import { getVideoByIdApi } from "../api";
+import { ref } from "vue";
 const route = useRoute();
 const userStore = useUserStore();
 let id = route.query.id as unknown as number;
+let url = ref();
+let videoInfo = ref({
+  cover: "",
+  name: "",
+  createTime: 0,
+  author: {
+    id: 0,
+    nickName: "",
+    selfIntroduction: "",
+    avatar: "",
+  },
+  selfIntroduction: "",
+});
 //将id存入pinia
 userStore.VideoIds.push(id);
+getVideoByIdApi(id).then((res) => {
+  videoInfo.value = res.data;
+  url.value = res.data.url;
+});
 </script>
 
 <style lang="scss" scoped>

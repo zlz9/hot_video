@@ -54,12 +54,15 @@ const props = defineProps({
   .index {
   }
   .cover {
+    width: 30px;
+    height: 30px;
     img {
-      width: 30px;
-      height: 30px;
+      width: 100%;
+      height: 100%;
     }
   }
   .name {
+    width: 80px;
   }
   .tag {
   }

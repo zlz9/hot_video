@@ -5,13 +5,25 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue";
+import { reactive, onBeforeUnmount } from "vue";
+import { useVideoStore } from "../store/video";
+import { useRoute } from "vue-router";
+import { getVideoByIdApi } from "../api";
+import { ref } from "vue";
+const route = useRoute();
+const videoStore = useVideoStore();
+let id = route.query.id as unknown as number;
+const url = ref();
+getVideoByIdApi(id).then((res) => {
+  url.value = res.data.url;
+});
 const options = reactive({
   width: "1400px", //播放器高度
   height: "900px", //播放器高度
   color: "#409eff", //主题色
   title: "", //视频名称
-  src: "", //视频源
+  // src: "", //视频源
+  src: url,
   // https://qiniu.zhoulizheng.cn/%E6%B5%8B%E8%AF%95%E8%A7%86%E9%A2%91.mp4
   muted: false, //静音
   webFullScreen: false,

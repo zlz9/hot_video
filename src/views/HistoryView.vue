@@ -15,7 +15,6 @@ let videoIds = userStore.VideoIds as unknown as string;
 const videoData = ref<VideoRes[]>([]);
 videoIds = Array.from(new Set(videoIds)).toString();
 console.log(videoIds, "videoIds");
-
 videoHistoryApi(videoIds).then((res) => {
   if (res.code == 200) {
     videoData.value = res.data;

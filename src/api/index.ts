@@ -245,3 +245,46 @@ export const searchVideoApi = (
     method: "get",
   });
 };
+/**
+ * 上传部分
+ */
+export const UploadApi = (data: any): Promise<RootString> => {
+  return requests({
+    url: "/api/upload",
+    method: "post",
+    data: data,
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
+export const DelFileApi = (url: String) => {
+  return requests({
+    url: `/api/video/del/${url}`,
+    method: "delete",
+  });
+};
+
+export const PublishVideoApi = (data: PublishApi): Promise<RootString> => {
+  return requests({
+    url: "/api/publish/video",
+    data,
+    method: "post",
+  });
+};
+
+export const getVideoByIdApi = (id: number): Promise<RootRes<VideoRes>> => {
+  return requests({
+    url: `/api/video/${id}`,
+    method: "get",
+  });
+};
+
+export const uploadUserApi = (data: userUpload): Promise<RootString> => {
+  return requests({
+    url: "/api/user/update",
+    method: "post",
+    data,
+  });
+};

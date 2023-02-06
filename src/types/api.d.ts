@@ -34,3 +34,19 @@ interface Comment {
   toUserId: any;
   videoId: any;
 }
+
+interface PublishApi {
+  tagIds: Array<number>;
+  isTop: boolean;
+  name: string;
+  selfIntroduction: string;
+  url: string;
+}
+
+interface userUpload {
+  avatar: string;
+  newPwd: string;
+  nickName: string;
+  oldPwd: string;
+  selfIntroduction: string;
+}
