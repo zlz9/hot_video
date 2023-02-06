@@ -69,6 +69,13 @@ export const getVideoByTagApi = (id: number) => {
 /**
  * 视频
  */
+//获取类似视频
+export const LimilarVideoApi = (id: number): Promise<RootObject<VideoRes>> => {
+  return requests({
+    url: `/api/video/similar/${id}`,
+    method: "get",
+  });
+};
 // /api/video/history
 export const videoHistoryApi = (ids: string): Promise<RootObject<VideoRes>> =>
   requests({
@@ -276,8 +283,11 @@ export const PublishVideoApi = (data: PublishApi): Promise<RootString> => {
 
 export const getVideoByIdApi = (id: number): Promise<RootRes<VideoRes>> => {
   return requests({
-    url: `/api/video/${id}`,
+    url: `/api/video/choose`,
     method: "get",
+    params: {
+      id: id,
+    },
   });
 };
 

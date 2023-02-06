@@ -7,7 +7,7 @@
         <VideoPlayer></VideoPlayer>
       </div>
       <div class="recommend">
-        <Recommend></Recommend>
+        <Recommend :videoList="videoList"></Recommend>
       </div>
     </div>
     <div class="video_info">
@@ -40,15 +40,19 @@
 </template>
 
 <script setup lang="ts">
+import { LimilarVideoApi } from "../api";
+import { watch } from "vue";
 import VideoPlayer from "../components/VideoPlayer.vue";
 import Recommend from "../components/Recommend.vue";
 import CommentView from "../components/CommentView.vue";
 import day from "dayjs";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useUserStore } from "../store/user";
 import { getVideoByIdApi } from "../api";
 import { ref } from "vue";
+const videoList = ref<VideoRes[]>([]);
 const route = useRoute();
+const router = useRouter();
 const userStore = useUserStore();
 let id = route.query.id as unknown as number;
 let url = ref();
@@ -64,12 +68,25 @@ let videoInfo = ref({
   },
   selfIntroduction: "",
 });
+LimilarVideoApi(id).then((res) => {
+  videoList.value = res.data;
+});
 //将id存入pinia
 userStore.VideoIds.push(id);
 getVideoByIdApi(id).then((res) => {
   videoInfo.value = res.data;
   url.value = res.data.url;
 });
+//监听，当路由发生变化时刷新页面，解决路由跳转不刷新的问题
+watch(
+  () => route.query.id,
+  (newValue, oldValue) => {
+    getVideoByIdApi(newValue).then((res) => {
+      videoInfo.value = res.data;
+      url.value = res.data.url;
+    });
+  }
+);
 </script>
 
 <style lang="scss" scoped>

@@ -5,17 +5,31 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, onBeforeUnmount } from "vue";
+import { reactive, onBeforeUnmount, watch } from "vue";
 import { useVideoStore } from "../store/video";
 import { useRoute } from "vue-router";
 import { getVideoByIdApi } from "../api";
 import { ref } from "vue";
 const route = useRoute();
+const controller = new AbortController();
 const videoStore = useVideoStore();
 let id = route.query.id as unknown as number;
 const url = ref();
+// 监听路由变化
 getVideoByIdApi(id).then((res) => {
   url.value = res.data.url;
+});
+watch(
+  () => route.query.id,
+  (newValue, oldValue) => {
+    getVideoByIdApi(newValue).then((res) => {
+      url.value = res.data.url;
+    });
+  }
+);
+onBeforeUnmount(() => {
+  //离开页面取消请求
+  controller.abort();
 });
 const options = reactive({
   width: "1400px", //播放器高度
