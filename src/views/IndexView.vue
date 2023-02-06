@@ -26,7 +26,7 @@
 <script setup lang="ts">
 import SwiperView from "../components/SwiperView.vue";
 import VideoContent from "../components/VideoContent.vue";
-import { reactive, ref, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import {
   SwiperHotApi,
   FunnyVideoApi,

@@ -13,7 +13,7 @@
     <div class="video_info">
       <div class="author">
         <div class="avatar">
-          <img v-lazy="videoInfo.author.avatar" alt="" />
+          <img :src="videoInfo.author.avatar" alt="" />
         </div>
         <div class="nick_name">{{ videoInfo.author.nickName }}</div>
       </div>
@@ -123,6 +123,8 @@ watch(
         }
       }
       .nick_name {
+        text-align: center;
+        width: 80px;
       }
     }
     .summary {

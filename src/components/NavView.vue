@@ -68,9 +68,13 @@ a {
     font-size: 25px;
     color: $font-color;
     &:hover {
-      font-size: 27px;
-      background-color: #bc2287;
-      color: rgb(161, 30, 30);
+      font-size: 30px;
+      background-color: #5e555b;
+      color: rgb(163, 172, 189);
+      width: 171px;
+      line-height: 40px;
+      height: 40px;
+      font-weight: 600;
     }
   }
 }

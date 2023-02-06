@@ -69,6 +69,8 @@ import { reactive, ref } from "vue";
 import { ElMessage, FormInstance } from "element-plus";
 import { TagAllApi, PublishVideoApi } from "../api";
 import { useVideoStore } from "../store/video";
+import { useRouter } from "vue-router";
+const router = useRouter();
 const ruleFormRef = ref<FormInstance>();
 const isTop = ref(false);
 const tags = ref<tagRes[]>();
@@ -134,6 +136,8 @@ const submitForm = (formEl: FormInstance | undefined) => {
             message: `${res.msg}`,
           });
           // videoStore.url = "";
+          // 发布成功跳转到管理页面
+          router.push("/admin");
         }
       });
     } else {

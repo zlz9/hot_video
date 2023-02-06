@@ -5,12 +5,12 @@
       <div class="user">
         <div class="avatar">
           <img
-            src="../assets/img/可爱01.gif"
+            :src="userStore.userInfo.avatar"
             alt=""
             style="width: 100%; height: 100%; border-radius: 50%"
           />
         </div>
-        <div class="user_name">小Z不吃韭菜</div>
+        <div class="user_name">{{ userStore.userInfo.nickName }}</div>
       </div>
       <el-input
         v-model="comment"
@@ -409,6 +409,10 @@ const showSubComment = (subItem: Child) => {
       }
       .user_name {
         font-size: 8px;
+        position: relative;
+        top: 16px;
+        width: 80px;
+        text-align: center;
       }
     }
   }

@@ -5,7 +5,7 @@
   </div>
   <div
     class="item"
-    v-for="(item, index) in props.videoData"
+    v-for="(item, index) in props.videoData.slice(0, 12)"
     :key="item.id"
     @click="goPlayer(item.id)"
   >
