@@ -98,6 +98,7 @@ import { useRouter } from "vue-router";
 import { LoginApi } from "../api/index";
 import { ElMessage } from "element-plus";
 import { useUserStore } from "../store/user";
+import { CurrentUserApi } from "../api/index";
 const userStore = useUserStore();
 const router = useRouter();
 let imgUrl = ref("http://localhost:8088/api/captcha?");
@@ -146,6 +147,17 @@ const submitForm = (formEl: FormInstance | undefined) => {
           });
         }
       });
+      setTimeout(() => {
+        CurrentUserApi()
+          .then((res) => {
+            if (res.code == 200) {
+              userStore.userInfo = res.data;
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }, 800);
     } else {
       return false;
     }

@@ -53,9 +53,7 @@
             v-model="word"
             class="input"
             @keyup.enter.native="sendMessage"
-          /><span
-            ><el-button class="btn" @click="sendMessage">发送</el-button></span
-          >
+          />
         </div>
       </div>
     </div>
@@ -196,6 +194,11 @@ watch(props, () => {
 </script>
 
 <style lang="scss" scoped>
+input {
+  outline: none;
+  border: none;
+  padding: 4px;
+}
 .background-image {
   width: 1200px;
   height: 800px;
@@ -297,7 +300,7 @@ watch(props, () => {
     }
     .input {
       height: 100%;
-      width: 1100px;
+      width: 100%;
       font-size: 20px;
     }
     .btn {

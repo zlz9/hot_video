@@ -8,10 +8,12 @@
         >
           <el-icon @click="cancel"><Close /></el-icon>
           <div class="user">
-            <div class="account">
-              <router-link to="/userupload">
-                {{ userStore.userInfo.nickName }}</router-link
-              >
+            <div class="account" @click="goUpload">
+              {{
+                userStore.userInfo.nickName
+                  ? userStore.userInfo.nickName
+                  : "游客"
+              }}
               <svg
                 t="1672377067859"
                 class="icon"
@@ -144,6 +146,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "../store/user";
+
 const userStore = useUserStore();
 const isShow = ref<boolean>(false);
 const router = useRouter();
@@ -164,6 +167,13 @@ const logout = () => {
 defineExpose({
   traggle,
 });
+const goUpload = () => {
+  if (userStore.userInfo.nickName) {
+    router.push("/update");
+  } else {
+    router.push("/login");
+  }
+};
 </script>
 
 <style lang="scss" scoped>

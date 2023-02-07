@@ -9,15 +9,7 @@ import { useChatStore } from "./store/chat";
 import FooterView from "./components/FooterView.vue";
 const userStore = useUserStore();
 const chatStore = useChatStore();
-CurrentUserApi()
-  .then((res) => {
-    if (res.code == 200) {
-      userStore.userInfo = res.data;
-    }
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+
 var ws = new WebSocket(`ws://localhost:8088/websocket/${userStore.token}`);
 ws.onopen = () => {
   console.log("连接成功");
