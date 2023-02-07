@@ -56,7 +56,6 @@ requests.interceptors.response.use(
     setTimeout(() => {
       hideLoading();
     }, 200);
-    console.log(res.data, "响应的东西");
     nprogress.done();
     if (res.data.code == 401) {
       const userStore = useUserStore();

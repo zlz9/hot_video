@@ -5,6 +5,7 @@
       <template #title>
         <div>管理-共{{ total }}个视频</div>
       </template>
+      <!-- 删除视频 -->
       <template #delet
         ><svg
           t="1674909169999"
@@ -67,9 +68,12 @@
 
 <script setup lang="ts">
 import VideoList from "../components/VideoList.vue";
-import { ref, nextTick } from "vue";
+import { ref } from "vue";
 import { useUserStore } from "../store/user";
 import { VideoListByUserIdApi } from "../api";
+const delVideo = () => {
+  console.log("触发");
+};
 let videoData = ref<VideoRes[]>([]);
 const isShow = ref(true);
 const userStore = useUserStore();

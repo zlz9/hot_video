@@ -1,6 +1,6 @@
 <template>
   <!-- 评论组件 -->
-  <div class="comment-box">
+  <div class="comment-box-top">
     <div class="comment-user">
       <div class="user">
         <div class="avatar">
@@ -392,9 +392,9 @@ const showSubComment = (subItem: Child) => {
 </script>
 
 <style lang="scss" scoped>
-.comment-box {
+.comment-box-top {
   color: $font-color;
-  min-height: 500px;
+  min-height: 600px;
   .comment-user {
     display: flex;
     align-items: center;
