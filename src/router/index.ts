@@ -6,6 +6,7 @@ import {
 } from "vue-router";
 import { useUserStore } from "../store/user";
 import MainView from "../components/MainView.vue";
+import IndexViewVue from "../views/IndexView.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -22,7 +23,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: "首页",
         },
-        component: () => import("@/views/IndexView.vue"),
+        component: IndexViewVue,
       },
       {
         path: "/hot",
