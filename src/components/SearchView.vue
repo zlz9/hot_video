@@ -1,6 +1,6 @@
 <template>
   <div class="search">
-    <el-input
+    <!-- <el-input
       v-model="search"
       placeholder="宁可错字,不要少字"
       :prefix-icon="Search"
@@ -9,17 +9,13 @@
       @blur="blur"
       @keyup.enter.native="goVideoInfo"
     >
-    </el-input>
-    <!-- 推荐 -->
-    <!-- 暂时去掉推荐搜索 -->
-    <!-- <div class="recommend" v-if="isShow">
-      <SearchRecommend></SearchRecommend>
-    </div> -->
+    </el-input> -->
+    <SearchComp></SearchComp>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Search } from "@element-plus/icons-vue";
+import SearchComp from "./SearchComp.vue";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 const router = useRouter();

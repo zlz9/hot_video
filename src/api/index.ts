@@ -118,7 +118,7 @@ export const RecommendApi = (): Promise<RootObject<VideoRes>> => {
   });
 };
 export const HotVideoTopApi = (
-  page: PageParams
+  page?: PageParams
 ): Promise<RootObject<VideoRes>> => {
   return requests({
     url: `/api/top/hot`,

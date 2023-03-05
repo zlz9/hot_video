@@ -1,5 +1,4 @@
 import router from "../router";
-import qs from "qs";
 //引入login
 // import login from "@/store/login";
 // 引入进度条
@@ -11,7 +10,7 @@ import { showLoading, hideLoading } from "../utils/loading";
 //对axios进行二次封装
 import axios from "axios";
 import { useUserStore } from "../store/user";
-
+import { message } from "../utils/resetMessage";
 const requests = axios.create({
   //配置对象
   baseURL: "http://localhost:8088",
@@ -62,7 +61,7 @@ requests.interceptors.response.use(
       userStore.token = "";
       localStorage.clear;
       router.push({ path: "/login" });
-      ElMessage({
+      message({
         type: "error",
         message: `${res.data.msg}`,
       });

@@ -109,7 +109,7 @@
         >
           <div class="comment-box">
             <div class="user">
-              <div class="user-name">
+              <div class="user-name-two">
                 {{ subItem.toUser.nickName }}
                 <span style="color: aqua"
                   ><svg
@@ -130,7 +130,7 @@
                   </svg> </span
                 ><span style="color: brown">{{ subItem.toUser.nickName }}</span>
               </div>
-              <div class="avatar">
+              <div class="avatar-two">
                 <img v-lazy:src="subItem.toUser.avatar" alt="" />
               </div>
             </div>
@@ -403,6 +403,8 @@ const showSubComment = (subItem: Child) => {
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
+      left: 0px;
 
       .avatar {
         width: 60px;
@@ -447,27 +449,7 @@ const showSubComment = (subItem: Child) => {
 }
 .comment-box {
   width: 100%;
-  .user {
-    .avatar {
-      position: relative;
-      top: 15px;
-      width: 40px;
-      height: 40px;
-      img {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-      }
-    }
-    .user-name {
-      color: rgb(147, 46, 198);
-      width: 200px;
-      position: relative;
-      left: 60px;
-      font-size: 8px;
-      top: 20px;
-    }
-  }
+
   .content {
     min-height: 33px;
     text-indent: 2em;
@@ -480,13 +462,42 @@ const showSubComment = (subItem: Child) => {
   }
 }
 .comment-one {
-  width: 1400px;
-  position: relative;
+  .user {
+    .avatar {
+      img {
+        position: relative;
+        right: 69px;
+        top: 1px;
+      }
+    }
+    .user-name {
+      top: 10px;
+      position: relative;
+      right: 23px;
+    }
+  }
 }
 .comment-two {
   width: 1310px;
   display: flex;
   position: relative;
   left: 60px;
+}
+.avatar-two {
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  left: -30px;
+  top: 15px;
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+}
+.user-name-two {
+  position: relative;
+  right: 34px;
+  bottom: 18px;
 }
 </style>

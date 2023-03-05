@@ -201,10 +201,14 @@ a {
   z-index: 100;
 }
 .user {
+  left: -40px;
   position: relative;
   top: 40px;
   font-size: 32px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  right: 0px;
   .account,
   .like,
   .history,
