@@ -32,7 +32,7 @@ h_video
 │ ├─ store # 全局 store 管理
 │ ├─ utils # 全局公共方法
 │ └─ views # 所有业务页面
-├─ tsconfig.json # ts 编译配置
+└─ tsconfig.json # ts 编译配置
 
 运行方式：
 
