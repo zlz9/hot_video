@@ -19,6 +19,8 @@
 
 ## 目录结构
 
+
+~~~
 h_video
 ├─ README.md  
 ├─ dist # 打包 dist
@@ -33,6 +35,7 @@ h_video
 │ ├─ utils # 全局公共方法
 │ └─ views # 所有业务页面
 └─ tsconfig.json # ts 编译配置
+~~~
 
 运行方式：
 
