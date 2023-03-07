@@ -44,4 +44,4 @@ npm install
 npm run dev
 ```
 
-- 预览地址<http://h_video.zhoulizheng.cn>
+- 预览地址<http://hvideo.zhoulizheng.cn>
